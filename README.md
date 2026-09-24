@@ -23,6 +23,18 @@ ceux auxquels les membres sont abonnés. Une date corrigée là-bas apparaît ic
 ⚠️ Ne jamais changer l'adresse de ces fichiers, ni en publier un nouveau pour l'année suivante :
 les téléphones abonnés ne suivraient pas.
 
+## Ce qui bouge, et pourquoi
+
+- **La lune de ce soir**, dans l'arche : calcul astronomique (lunaison moyenne), dessinée telle qu'on la
+  voit depuis Madagascar (hémisphère sud : le croissant montant est éclairé à gauche). Elle ne dépend pas
+  du calendrier et reste juste s'il ne répond pas.
+- **Les animations** ne jouent que si l'appareil n'a pas demandé moins de mouvement ; la classe qui les
+  prépare est posée dans l'en-tête, et le contenu reste visible sans le script.
+
+## Crédits
+
+Contour de Madagascar : [Natural Earth](https://www.naturalearthdata.com/), domaine public.
+
 ## Règles de rédaction
 
 - Aucun nom, aucune photo, aucun chiffre sur la communauté à ce stade.
