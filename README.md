@@ -38,7 +38,7 @@ Contour de Madagascar : [Natural Earth](https://www.naturalearthdata.com/), doma
 ## Règles de rédaction
 
 - Aucun nom, aucune photo, aucun chiffre sur la communauté à ce stade. **Seule exception : la rubrique
-  Éducation**, qui affiche deux totaux datés (bourses MAMAS, prêt universitaire). Jamais de détail par
+  Éducation**, qui affiche deux totaux datés (bourses scolaires, prêt universitaire). Jamais de détail par
   section ni par pays : il désignerait des élèves. À mettre à jour une fois par an, à cet endroit seulement.
 - Aucun montant ni critère de décision pour les aides : on explique la démarche, pas le barème.
 - Aucun cadratin ni demi-cadratin dans le texte affiché.
