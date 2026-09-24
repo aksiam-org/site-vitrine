@@ -1,0 +1,1083 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AKSIAM</title>
+<meta name="description" content="Association Khoja Shia Ithna Asheri de Madagascar : le culte, la transmission et l'entraide, dans chacune de ses sections.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo-aksiam.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* ---------- Jetons : couleurs tirées du logo (vert, orange, anthracite) ---------- */
+:root {
+  --bg: #f4f6f2;
+  --surface: #ffffff;
+  --surface-2: #e9efe7;
+  --ink: #1b221e;
+  --ink-2: #445049;
+  --ink-3: #5f6b64;
+  --green: #00843f;          /* vert du logo, assombri pour le texte (AA) */
+  --green-logo: #00a84e;
+  --green-soft: #e0f0e5;
+  --orange: #ec9416;         /* orange du logo : décor uniquement */
+  --orange-text: #9a5700;    /* orange lisible sur fond clair */
+  --orange-soft: #fdefd9;
+  --anthracite: #2e2e2e;
+  --deuil: #2e2e2e;
+  --on-green: #ffffff;
+  --arch-fill: #e3f0e5;
+  --maquette: #fff1cc;
+  --maquette-ink: #6d4a00;
+  --rayon: 18px;
+  --display: "Marcellus", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --text: "Source Sans 3", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1411; --surface: #172019; --surface-2: #1d2822; --ink: #e8eee9; --ink-2: #b4bfb7;
+    --ink-3: #95a199; --green: #45c882; --green-logo: #45c882; --green-soft: #183624;
+    --orange: #f2a53a; --orange-text: #f5b75e; --orange-soft: #372810; --on-green: #0b1a11;
+    --arch-fill: #173020; --deuil: #d9ded9; --maquette: #3a2d0c; --maquette-ink: #f7d48a;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1411; --surface: #172019; --surface-2: #1d2822; --ink: #e8eee9; --ink-2: #b4bfb7;
+  --ink-3: #95a199; --green: #45c882; --green-logo: #45c882; --green-soft: #183624;
+  --orange: #f2a53a; --orange-text: #f5b75e; --orange-soft: #372810; --on-green: #0b1a11;
+  --arch-fill: #173020; --deuil: #d9ded9; --maquette: #3a2d0c; --maquette-ink: #f7d48a;
+}
+
+/* ---------- Base : texte courant à 18 px, rien sous 15,75 px ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 112.5%; scroll-behavior: smooth; scroll-padding-top: 100px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 1rem/1.65 var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--green); text-underline-offset: 4px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.12; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.wrap { width: min(1180px, 100%); margin-inline: auto; padding-inline: 20px; }
+.eyebrow {
+  font-size: 0.875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange-text);
+}
+/* Marque de maquette : disparaît en production */
+.provisoire {
+  text-decoration: underline dotted var(--orange); text-decoration-thickness: 2px; text-underline-offset: 6px;
+}
+.visuellement-cache {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- Bandeau de maquette ---------- */
+.bandeau { background: var(--maquette); color: var(--maquette-ink); font-size: 0.875rem; text-align: center; padding: 8px 16px; }
+
+/* ---------- En-tête, avec la barre de progression ---------- */
+header.site {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px);
+}
+.entete { display: flex; align-items: center; gap: 20px; min-height: 76px; }
+.marque { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); flex-shrink: 0; }
+.marque .pastille { width: 48px; height: 48px; border-radius: 50%; background: #fff; padding: 2px; }
+.marque strong { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.12em; }
+nav.ancres { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+nav.ancres::-webkit-scrollbar { display: none; }
+nav.ancres a {
+  color: var(--ink-2); text-decoration: none; font-weight: 600; font-size: 0.95rem;
+  padding: 9px 14px; border-radius: 999px; white-space: nowrap; transition: background .2s, color .2s;
+}
+nav.ancres a:hover { color: var(--green); background: var(--green-soft); }
+nav.ancres a[aria-current="true"] { color: var(--on-green); background: var(--green); }
+.outils { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.langues { display: inline-flex; border-radius: 999px; padding: 3px; background: var(--surface-2); }
+.langues button {
+  font: 700 0.875rem var(--text); letter-spacing: 0.06em; border: 0; background: transparent; color: var(--ink-2);
+  padding: 6px 12px; border-radius: 999px; cursor: pointer;
+}
+.langues button[aria-pressed="true"] { background: var(--green); color: var(--on-green); }
+
+.progression { position: relative; height: 4px; background: var(--surface-2); }
+.progression .rempli { height: 100%; width: 0; background: linear-gradient(90deg, var(--green), var(--green-logo)); }
+/* Chaque jalon est un bouton : zone de toucher de 28 px, point dessiné de 10 px */
+.progression .etape {
+  position: absolute; top: 50%; width: 28px; height: 28px; margin-left: -14px; transform: translateY(-50%);
+  border: 0; padding: 0; background: transparent; cursor: pointer; z-index: 1;
+}
+.progression .etape::before {
+  content: ""; position: absolute; left: 9px; top: 9px; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--surface-2); box-shadow: 0 0 0 2px var(--bg); transition: background .2s, transform .2s;
+}
+.progression .etape.passee::before { background: var(--orange); }
+.progression .etape:hover::before, .progression .etape.montre::before { transform: scale(1.5); }
+.progression .etiquette {
+  position: absolute; top: 16px; left: 0; z-index: 2; pointer-events: none; white-space: nowrap;
+  font: 700 0.875rem var(--text); color: var(--bg); background: var(--ink);
+  padding: 6px 14px; border-radius: 999px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  opacity: 0; transform: translateY(-4px); transition: opacity .2s, transform .2s;
+}
+.progression .etiquette.visible { opacity: 1; transform: none; }
+
+.bouton {
+  display: inline-flex; align-items: center; gap: 10px; font: 700 1rem var(--text); text-decoration: none;
+  padding: 14px 24px; border-radius: 999px; border: 0; cursor: pointer; white-space: nowrap;
+}
+.bouton.plein { background: var(--green); color: var(--on-green); }
+.bouton.plein:hover { filter: brightness(1.08); }
+.bouton.doux { background: var(--green-soft); color: var(--green); }
+.bouton.doux:hover { filter: brightness(0.97); }
+.bouton.petit { padding: 10px 18px; font-size: 0.95rem; }
+.bouton .court { display: none; }
+
+/* ---------- Ouverture ---------- */
+.ouverture { position: relative; overflow: hidden; }
+.ouverture::before {
+  /* étoiles à huit branches, motif de l'art islamique, très discret */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-width='1'%3E%3Crect x='18' y='18' width='28' height='28'/%3E%3Crect x='18' y='18' width='28' height='28' transform='rotate(45 32 32)'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask: linear-gradient(90deg, transparent 0%, #000 55%, #000 100%);
+          mask: linear-gradient(90deg, transparent 0%, #000 55%, #000 100%);
+  opacity: 0.05;
+}
+.ouverture .grille { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; padding-block: 80px 96px; position: relative; }
+.ouverture h1 { font-size: clamp(2.6rem, 6.2vw, 4.8rem); margin-top: 18px; }
+.ouverture h1 em { font-style: normal; color: var(--green); }
+.ouverture .chapeau { font-size: 1.25rem; line-height: 1.6; color: var(--ink-2); max-width: 34em; margin-top: 26px; }
+.ouverture .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+.ouverture .siege { margin-top: 30px; font-size: 0.95rem; color: var(--ink-3); display: flex; gap: 10px; align-items: center; }
+.ouverture .siege svg { color: var(--orange); flex-shrink: 0; }
+
+.arche { position: relative; width: min(400px, 100%); margin-inline: auto; aspect-ratio: 200 / 250; }
+.arche svg.cadre { position: absolute; inset: 0; width: 100%; height: 100%; }
+.arche .logo {
+  position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%); width: 64%;
+  border-radius: 50%; background: #fff; padding: 3%;
+}
+
+/* ---------- Blocs ---------- */
+section.bloc { padding-block: 96px; }
+section.bloc.teinte { background: var(--surface-2); }
+.titre-bloc { display: grid; gap: 14px; max-width: 46em; margin-bottom: 44px; }
+.titre-bloc h2 { font-size: clamp(2.2rem, 4.4vw, 3.4rem); }
+.titre-bloc p { color: var(--ink-2); font-size: 1.1rem; }
+
+/* Tuiles : séparées par le fond et l'espace, jamais par un filet */
+.tuile { background: var(--surface); border-radius: var(--rayon); padding: 30px; }
+
+.axes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.axes > div { background: var(--green-soft); border-radius: var(--rayon); padding: 32px; }
+.axes h3 { font-size: 1.75rem; color: var(--green); }
+.axes p { margin-top: 12px; color: var(--ink-2); }
+
+.domaines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.domaine { background: var(--surface); border-radius: var(--rayon); padding: 30px; display: grid; gap: 8px; align-content: start; }
+.domaine .nom { display: flex; align-items: center; gap: 12px; }
+.domaine .nom::before { content: ""; width: 10px; height: 10px; border-radius: 2px; background: var(--orange); transform: rotate(45deg); flex-shrink: 0; }
+.domaine h3 { font-family: var(--text); font-weight: 700; font-size: 1.25rem; }
+.domaine .sous { font-size: 0.95rem; color: var(--ink-3); font-style: italic; }
+.domaine p { color: var(--ink-2); }
+.domaine a { font-weight: 700; margin-top: 6px; }
+.note-demarche {
+  margin-top: 28px; display: flex; gap: 14px; align-items: flex-start; padding: 20px 24px;
+  background: var(--green-soft); color: var(--ink); border-radius: var(--rayon);
+}
+
+.sections-liste { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; padding: 0; margin: 0; }
+.sections-liste li { padding: 14px 24px; background: var(--surface-2); border-radius: 999px; font-weight: 700; font-size: 1.05rem; }
+.sections-liste li small { font-weight: 400; font-size: 0.9rem; color: var(--ink-3); margin-left: 8px; }
+.sections-liste li.siege-li { background: var(--green); color: var(--on-green); }
+.sections-liste li.siege-li span { font-weight: 400; opacity: 0.9; margin-left: 8px; font-size: 0.9rem; }
+
+.c360 { display: grid; grid-template-columns: 320px 1fr; gap: 56px; align-items: start; }
+.c360 .logo-c360 { background: #fff; border-radius: var(--rayon); padding: 22px; }
+.c360 .devise { font-family: var(--display); font-size: 1.65rem; line-height: 1.25; color: var(--green); margin-top: 18px; }
+.c360 .texte { display: grid; gap: 20px; color: var(--ink-2); max-width: 42em; }
+.c360 h2 { font-size: clamp(2.2rem, 4.4vw, 3.4rem); color: var(--ink); }
+.themes { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+.themes li { font-size: 0.95rem; font-weight: 700; padding: 8px 16px; border-radius: 999px; background: var(--surface); color: var(--green); }
+.etapes { list-style: none; padding: 0; margin: 6px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.etapes li { background: var(--surface); border-radius: var(--rayon); padding: 22px; }
+.etapes .etat {
+  display: inline-block; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 999px;
+}
+.etapes li.fait .etat { color: var(--green); background: var(--green-soft); }
+.etapes li.encours .etat { color: var(--orange-text); background: var(--orange-soft); }
+.etapes li.avenir .etat { color: var(--ink-3); background: var(--surface-2); }
+.etapes h3 { font-family: var(--text); font-weight: 700; font-size: 1.15rem; margin-top: 14px; color: var(--ink); }
+.etapes p { margin-top: 6px; }
+.engagement { padding: 22px 24px; background: var(--surface); border-radius: var(--rayon); color: var(--ink); }
+
+.en-attente {
+  display: flex; gap: 12px; align-items: flex-start; background: var(--maquette); color: var(--maquette-ink);
+  padding: 16px 22px; border-radius: var(--rayon); margin-bottom: 28px;
+}
+.fiches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.fiche { background: var(--surface-2); border-radius: var(--rayon); padding: 30px; display: grid; gap: 12px; align-content: start; }
+.fiche .haut { display: flex; justify-content: space-between; gap: 10px; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.fiche h3 { font-family: var(--text); font-weight: 700; font-size: 1.3rem; line-height: 1.25; }
+.fiche p { color: var(--ink-2); }
+.fiche .pied-fiche { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.fiche .statut, .fiche .exemple { font-size: 0.875rem; font-weight: 700; padding: 5px 12px; border-radius: 999px; }
+.statut.service { background: var(--green-soft); color: var(--green); }
+.statut.cours { background: var(--orange-soft); color: var(--orange-text); }
+.statut.realise { background: var(--surface); color: var(--ink-2); }
+.fiche .exemple { color: var(--maquette-ink); background: var(--maquette); font-weight: 600; }
+.format { margin-top: 22px; color: var(--ink-3); }
+
+.acces { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+.porte {
+  display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; align-items: center; text-decoration: none; color: var(--ink);
+  background: var(--surface); border-radius: var(--rayon); padding: 32px; transition: background .2s;
+}
+.porte:hover { background: var(--green-soft); }
+.porte h3 { font-family: var(--text); font-weight: 700; font-size: 1.4rem; }
+.porte p { color: var(--ink-2); grid-column: 1; }
+.porte .adresse { grid-column: 1; font-size: 0.95rem; color: var(--green); font-weight: 700; }
+.porte .fleche {
+  grid-row: 1 / span 3; grid-column: 2; width: 52px; height: 52px; border-radius: 50%;
+  background: var(--green); color: var(--on-green); display: grid; place-items: center;
+}
+.discret { margin-top: 20px; color: var(--ink-3); }
+
+.contact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.contact > div { background: var(--surface-2); border-radius: var(--rayon); padding: 30px; display: grid; gap: 8px; align-content: start; }
+.contact .etiquette { font-size: 0.875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.contact .valeur { font-size: 1.15rem; font-weight: 700; }
+
+
+/* ---------- Calendrier ---------- */
+.cal-accueil { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 20px; }
+.cal-jour { background: var(--green); color: var(--on-green); border-radius: var(--rayon); padding: 34px; display: grid; gap: 14px; align-content: start; }
+.cal-jour .eyebrow { color: var(--on-green); opacity: 0.85; }
+.cal-jour .cal-hijri { font-family: var(--display); font-size: clamp(2rem, 4vw, 2.9rem); line-height: 1.1; }
+.cal-jour .cal-greg { font-size: 1.1rem; opacity: 0.92; }
+.cal-jour .cal-du-jour { display: flex; gap: 10px; align-items: flex-start; background: rgba(255, 255, 255, 0.14); border-radius: 12px; padding: 12px 14px; font-weight: 600; }
+.cal-jour .cal-du-jour .point { margin-top: 8px; }
+.cal-jour .point.fete { background: var(--on-green); }
+.cal-jour .bouton { background: var(--on-green); color: var(--green); justify-self: start; margin-top: 6px; }
+.cal-prochaines { background: var(--surface); border-radius: var(--rayon); padding: 32px; }
+.cal-prochaines h3 { font-family: var(--text); font-weight: 700; font-size: 1.3rem; margin-bottom: 18px; }
+.cal-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.cal-item { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; }
+.cal-item .point { grid-row: span 2; margin-top: 9px; }
+.cal-nom { font-weight: 700; }
+.cal-quand { color: var(--ink-3); }
+.insecable { white-space: nowrap; }
+.point { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.point.deuil { background: var(--deuil); } .point.fete { background: var(--green-logo); } .point.autre { background: var(--orange); }
+.cal-abonnement { margin-top: 20px; background: var(--surface-2); border-radius: var(--rayon); padding: 32px; display: grid; gap: 16px; }
+.cal-abonnement h3 { font-family: var(--text); font-weight: 700; font-size: 1.3rem; }
+.cal-abonnement p { color: var(--ink-2); }
+.versions { display: inline-flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border-radius: 999px; padding: 4px; justify-self: start; }
+.versions button { font: 700 0.95rem var(--text); border: 0; background: transparent; border-radius: 999px; padding: 9px 16px; cursor: pointer; color: var(--ink-2); }
+.versions button[aria-pressed="true"] { background: var(--green); color: var(--on-green); }
+.actions-abo { display: flex; flex-wrap: wrap; gap: 12px; }
+.lien-brut { font-size: 0.95rem; color: var(--ink-3); overflow-wrap: anywhere; }
+.cal-abonnement .retour { color: var(--green); font-weight: 700; min-height: 1.6em; }
+
+/* Tuiles posées sur un fond teinté : elles passent en surface claire pour rester visibles */
+.teinte .sections-liste li:not(.siege-li), .teinte .fiche, .teinte .contact > div { background: var(--surface); }
+.teinte .statut.realise { background: var(--surface-2); }
+
+/* ---------- Retour en haut de page (flotte : seul élément qui garde une ombre) ---------- */
+.haut-de-page {
+  position: fixed; right: 22px; bottom: 22px; z-index: 20; width: 56px; height: 56px; border-radius: 50%; border: 0;
+  background: var(--green); color: var(--on-green); display: grid; place-items: center; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .25s, transform .25s;
+}
+.haut-de-page.visible { opacity: 1; transform: none; pointer-events: auto; }
+.haut-de-page:hover { filter: brightness(1.08); }
+
+/* ---------- Pied de page ---------- */
+footer.site { background: var(--anthracite); color: #dde2dd; padding-block: 56px 36px; }
+footer.site .pied { display: flex; flex-wrap: wrap; gap: 28px; justify-content: space-between; align-items: flex-start; }
+footer.site .ident { display: flex; gap: 16px; align-items: center; }
+footer.site .ident img { width: 60px; height: 60px; border-radius: 50%; background: #fff; padding: 2px; }
+footer.site .ident strong { font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.1em; color: #fff; display: block; }
+footer.site .ident span { font-size: 0.95rem; color: #b8c0b9; }
+footer.site nav { display: flex; gap: 22px; flex-wrap: wrap; }
+footer.site a { color: #dde2dd; }
+footer.site .mention { width: 100%; padding-top: 24px; font-size: 0.9rem; color: #a3aca5; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+/* ---------- Adaptation aux écrans ---------- */
+@media (max-width: 980px) {
+  .domaines, .fiches { grid-template-columns: repeat(2, 1fr); }
+  .c360 { grid-template-columns: 1fr; gap: 32px; }
+  .c360 .logo-c360 { max-width: 260px; }
+}
+@media (max-width: 820px) {
+  .entete { flex-wrap: wrap; gap: 8px 12px; padding-block: 10px; min-height: 0; }
+  nav.ancres { order: 3; width: 100%; margin-left: 0; }
+  .outils { margin-left: auto; }
+  .ouverture .grille { grid-template-columns: 1fr; padding-block: 44px 56px; gap: 32px; }
+  .arche { width: min(260px, 72%); order: -1; }
+  .axes, .contact, .etapes, .acces, .cal-accueil { grid-template-columns: 1fr; }
+  section.bloc { padding-block: 64px; }
+  .porte { padding: 26px; }
+}
+@media (max-width: 560px) {
+  .domaines, .fiches { grid-template-columns: 1fr; }
+  .outils .bouton.petit span.long { display: none; }
+  .outils .bouton.petit span.court { display: inline; }
+  .outils .bouton.petit svg { display: none; }
+  .outils .bouton.petit { padding: 9px 15px; }
+  .outils { gap: 6px; }
+  .langues button { padding: 6px 9px; }
+  .entete { gap: 6px 8px; }
+  .marque { gap: 8px; }
+  .marque .pastille { width: 40px; height: 40px; }
+  .marque strong { font-size: 1.15rem; letter-spacing: 0.08em; }
+  .domaine, .fiche, .axes > div, .contact > div, .cal-jour, .cal-prochaines, .cal-abonnement { padding: 24px; }
+  .versions { border-radius: 16px; }
+  .haut-de-page { right: 16px; bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .haut-de-page, nav.ancres a, .porte, .progression .etape::before, .progression .etiquette { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="bandeau" data-en="Mock-up v1 · provisional texts (dashed underline) to be validated · not published">Maquette v1 · textes provisoires (soulignés en pointillé) à valider · non publiée</div>
+
+<header class="site">
+  <div class="wrap entete">
+    <a class="marque" href="#haut" aria-label="AKSIAM, accueil">
+      <img class="pastille" src="assets/logo-aksiam.webp" alt="">
+      <strong>AKSIAM</strong>
+    </a>
+    <nav class="ancres" aria-label="Sommaire">
+      <a href="#association" data-en="The Association">L'Association</a>
+      <a href="#actions" data-en="What we do">Nos actions</a>
+      <a href="#calendrier" data-en="Calendar">Calendrier</a>
+      <a href="#sections" data-en="Our sections">Nos sections</a>
+      <a href="#consultation" data-en="360° Consultation">Consultation 360°</a>
+      <a href="#contact" data-en="Contact">Contact</a>
+    </nav>
+    <div class="outils">
+      <div class="langues" role="group" aria-label="Langue / Language">
+        <button type="button" id="lang-fr" data-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="bouton plein petit" href="#membres"><span class="long" data-en="Members' area">Espace membres</span><span class="court" data-en="Members">Membres</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+  <div class="progression" aria-hidden="true"><div class="rempli"></div></div>
+</header>
+
+<main id="haut">
+
+  <!-- Ouverture -->
+  <section class="ouverture">
+    <div class="wrap grille">
+      <div>
+        <p class="eyebrow" data-en="Khoja Shia Ithna Asheri Association of Madagascar">Association Khoja Shia Ithna Asheri de Madagascar</p>
+        <h1 class="provisoire" data-en="Gathered in faith, <em>united in mutual support.</em>">Rassemblés par la foi, <em>unis par l'entraide.</em></h1>
+        <p class="chapeau provisoire" data-en="AKSIAM brings together the Khoja Shia Ithna Asheri community of Madagascar. It keeps worship alive, passes faith and culture on to the next generations, and organises mutual support among its members, in each of its sections.">L'AKSIAM réunit la communauté Khoja Shia Ithna Asheri de Madagascar. Elle fait vivre le culte, transmet la foi et la culture aux nouvelles générations, et organise l'entraide entre ses membres, dans chacune de ses sections.</p>
+        <div class="actions">
+          <a class="bouton plein" href="#actions" data-en="Discover what we do">Découvrir nos actions</a>
+          <a class="bouton doux" href="#consultation" data-en="The 360° Consultation">La Consultation 360°</a>
+        </div>
+        <p class="siege">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <span data-en="Head office: Ankorondrano Mosque, Antananarivo">Siège : Mosquée d'Ankorondrano, Antananarivo</span>
+        </p>
+      </div>
+      <div class="arche" aria-hidden="true">
+        <!-- Arche en accolade, reprise de la coupole du logo -->
+        <svg class="cadre" viewBox="0 0 200 250" preserveAspectRatio="none">
+          <path d="M6 248 V118 C6 76 52 58 84 30 Q96 18 100 6 Q104 18 116 30 C148 58 194 76 194 118 V248 Z" fill="var(--arch-fill)" stroke="var(--green-logo)" stroke-width="2.5"/>
+          <path d="M18 248 V122 C18 86 60 70 88 44 Q97 34 100 24 Q103 34 112 44 C140 70 182 86 182 122 V248" fill="none" stroke="var(--orange)" stroke-width="1.5"/>
+          <circle cx="100" cy="4" r="3" fill="var(--orange)"/>
+        </svg>
+        <img class="logo" src="assets/logo-aksiam.webp" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- L'Association -->
+  <section class="bloc" id="association" data-jalon="L&#39;Association" data-jalon-en="The Association">
+    <div class="wrap">
+      <div class="titre-bloc">
+        <p class="eyebrow" data-en="Who we are">Qui sommes-nous</p>
+        <h2 data-en="The Association">L'Association</h2>
+        <p class="provisoire" data-en="A religious association, AKSIAM brings together the Khoja Shia Ithna Asheri families living in Madagascar. It is organised in sections, present in the main towns of the country, which lead community life as close as possible to the families.">Association cultuelle, l'AKSIAM rassemble les familles Khoja Shia Ithna Asheri établies à Madagascar. Elle s'organise en sections, présentes dans les principales villes du pays, qui animent la vie de la communauté au plus près des familles.</p>
+      </div>
+      <div class="axes">
+        <div>
+          <h3 data-en="Worship">Le culte</h3>
+          <p class="provisoire" data-en="Keeping places of prayer alive, and the great dates of the religious calendar.">Faire vivre les lieux de prière et les grandes dates du calendrier religieux.</p>
+        </div>
+        <div>
+          <h3 data-en="Transmission">La transmission</h3>
+          <p class="provisoire" data-en="Passing the faith, language and culture of the community on to the youngest.">Transmettre la foi, la langue et la culture de la communauté aux plus jeunes.</p>
+        </div>
+        <div>
+          <h3 data-en="Mutual support">L'entraide</h3>
+          <p class="provisoire" data-en="Standing by members at life's important moments: studies, health, hardship.">Soutenir les membres dans les étapes importantes de la vie : études, santé, épreuves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nos actions -->
+  <section class="bloc teinte" id="actions" data-jalon="Nos actions" data-jalon-en="What we do">
+    <div class="wrap">
+      <div class="titre-bloc">
+        <p class="eyebrow" data-en="What we do">Ce que nous faisons</p>
+        <h2 data-en="Our areas of action">Nos domaines d'action</h2>
+      </div>
+      <div class="domaines">
+        <div class="domaine">
+          <div class="nom"><h3 data-en="Education">Éducation</h3></div>
+          <p class="provisoire" data-en="Supporting studies, up to an interest-free study loan for higher education.">Accompagner les études, jusqu'au prêt d'études sans intérêt pour l'enseignement supérieur.</p>
+          <a href="https://campus.aksiam.mg" target="_blank" rel="noopener noreferrer" data-en="Discover Campus →">Découvrir Campus →</a>
+        </div>
+        <div class="domaine">
+          <div class="nom"><h3 data-en="Health">Santé</h3></div>
+          <p class="provisoire" data-en="Coordinating help for members who are ill, with the support of their section.">Coordonner l'aide aux membres malades, avec l'appui de leur section.</p>
+        </div>
+        <div class="domaine">
+          <div class="nom"><h3 data-en="Religious education">Enseignement religieux</h3></div>
+          <p class="sous">Tabligh &amp; Madressa</p>
+          <p class="provisoire" data-en="Passing on faith and practice, from the youngest to adults.">Transmettre la foi et la pratique, des plus jeunes aux adultes.</p>
+        </div>
+        <div class="domaine">
+          <div class="nom"><h3 data-en="Youth &amp; sports">Jeunesse et sports</h3></div>
+          <p class="provisoire" data-en="Giving young people places to meet, get involved and grow together.">Offrir aux jeunes des lieux pour se retrouver, s'engager et grandir ensemble.</p>
+          <a href="https://www.facebook.com/profile.php?id=61554652256265" target="_blank" rel="noopener noreferrer" data-en="Follow Aksiam Sports on Facebook →">Suivre Aksiam Sports sur Facebook →</a>
+        </div>
+        <div class="domaine">
+          <div class="nom"><h3 data-en="Women">Femmes</h3></div>
+          <p class="provisoire" data-en="Supporting initiatives led by the women of the community.">Soutenir les initiatives portées par les femmes de la communauté.</p>
+        </div>
+        <div class="domaine">
+          <div class="nom"><h3 data-en="Mutual aid">Entraide</h3></div>
+          <p class="sous">Fanampiana</p>
+          <p class="provisoire" data-en="Helping families through economic hardship.">Aider les familles à traverser les difficultés économiques.</p>
+        </div>
+        <div class="domaine">
+          <div class="nom"><h3 data-en="Housing">Logement</h3></div>
+          <p class="provisoire" data-en="Helping families in need to find housing.">Accompagner l'accès au logement des familles qui en ont besoin.</p>
+        </div>
+        <div class="domaine">
+          <div class="nom"><h3 data-en="Cemetery">Cimetière</h3></div>
+          <p class="sous">Kabrastan</p>
+          <p class="provisoire" data-en="Caring for the community's resting places, and standing by bereaved families.">Veiller aux lieux de repos de la communauté et accompagner les familles endeuillées.</p>
+        </div>
+        <div class="domaine">
+          <div class="nom"><h3 data-en="Social action">Action sociale</h3></div>
+          <p class="provisoire" data-en="Acting alongside the most vulnerable.">Agir auprès des plus fragiles.</p>
+        </div>
+      </div>
+      <p class="note-demarche">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <span data-en="Any request for help goes through the member's own section, which forwards it to the Association.">Toute demande d'aide passe par la section du membre, qui la transmet à l'Association.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Calendrier : lu en direct sur GitHub, la source que les téléphones abonnés utilisent déjà.
+       Liens relatifs : ils fonctionnent en aperçu comme à la racine d'aksiam.mg -->
+  <section class="bloc" id="calendrier" data-jalon="Calendrier" data-jalon-en="Calendar">
+    <div class="wrap">
+      <div class="titre-bloc">
+        <p class="eyebrow" data-en="Shia calendar">Calendrier chiite</p>
+        <h2 data-en="Calendar">Calendrier</h2>
+        <p data-en="Dates follow the sighting of the crescent moon: when one is corrected, it is corrected here too.">Les dates suivent l'observation du croissant : quand l'une d'elles est corrigée, elle l'est aussi ici.</p>
+      </div>
+      <div class="cal-accueil">
+        <div class="cal-jour">
+          <p class="eyebrow" data-en="Today">Aujourd'hui</p>
+          <div class="cal-jour-contenu" aria-live="polite"><p class="cal-greg">…</p></div>
+          <a class="bouton" href="calendrier/" target="_blank" rel="noopener noreferrer" data-en="See the full calendar →">Voir le calendrier complet →</a>
+        </div>
+        <div class="cal-prochaines">
+          <h3 data-en="Coming up">Prochaines dates</h3>
+          <ol class="cal-liste"></ol>
+        </div>
+      </div>
+      <div class="cal-abonnement" id="cal-abonnement">
+        <div>
+          <h3 data-en="Receive it on your phone">Le recevoir sur son téléphone</h3>
+          <p data-en="Subscribe once: corrected dates then arrive on their own.">Abonnez-vous une fois : les dates corrigées arrivent ensuite toutes seules.</p>
+        </div>
+        <div class="versions" role="group" aria-label="Version">
+          <button type="button" data-version="standard" aria-pressed="true" data-en="Standard">Standard</button>
+          <button type="button" data-version="nuits" aria-pressed="false" data-en="With evening reminders">Avec rappels du soir</button>
+        </div>
+        <div class="actions-abo">
+          <a class="bouton plein" data-abo="ios" href="#" data-en="Subscribe on iPhone or Mac">S'abonner sur iPhone ou Mac</a>
+          <a class="bouton doux" data-abo="google" href="https://calendar.google.com/" target="_blank" rel="noopener noreferrer" data-en="Add to Google Calendar">Ajouter à Google Agenda</a>
+          <button type="button" class="bouton doux" data-abo="copier" data-en="Copy the link">Copier le lien</button>
+        </div>
+        <p class="lien-brut" data-abo="lien"></p>
+        <p class="retour" data-abo="retour" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nos sections -->
+  <section class="bloc teinte" id="sections" data-jalon="Nos sections" data-jalon-en="Our sections">
+    <div class="wrap">
+      <div class="titre-bloc">
+        <p class="eyebrow" data-en="Across Madagascar">Partout à Madagascar</p>
+        <h2 data-en="Our sections">Nos sections</h2>
+        <p data-en="Each section brings together the families of its town and leads community life there.">Chaque section réunit les familles de sa ville et y anime la vie de la communauté.</p>
+      </div>
+      <ul class="sections-liste">
+        <li class="siege-li">Antananarivo<span data-en="head office">siège</span></li>
+        <li>Ambovombe</li>
+        <li>Antsirabe</li>
+        <li>Antsohihy</li>
+        <li>Belo</li>
+        <li>Fianarantsoa</li>
+        <li>Fort-Dauphin<small>Tolagnaro</small></li>
+        <li>Maevatanana</li>
+        <li>Majunga<small>Mahajanga</small></li>
+        <li>Morombe</li>
+        <li>Morondava</li>
+        <li>Tamatave<small>Toamasina</small></li>
+        <li>Tuléar<small>Toliara</small></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Consultation 360° -->
+  <section class="bloc" id="consultation" data-jalon="Consultation 360°" data-jalon-en="360° Consultation">
+    <div class="wrap c360">
+      <div>
+        <img class="logo-c360" src="assets/logo-c360.webp" alt="Consultation 360°">
+        <p class="devise" data-en="Our community, our voice, our future">Notre communauté, notre voix, notre avenir</p>
+      </div>
+      <div class="texte">
+        <p class="eyebrow" data-en="Current project">Projet en cours</p>
+        <h2 style="color:var(--ink)">Consultation 360°</h2>
+        <p data-en="The census answered the question “Who are we?”. The 360° Consultation goes further: how do the community's families live today, and what will they need tomorrow?">Le recensement a répondu à la question « Qui sommes-nous ? ». La Consultation 360° va plus loin : comment vivent aujourd'hui les familles de la communauté, et de quoi auront-elles besoin demain ?</p>
+        <p data-en="Heads of household, spouses and young people aged 14 to 30 were invited to take part. Eight themes were explored:">Chefs de famille, conjoints et jeunes de 14 à 30 ans ont été invités à y participer. Huit thèmes ont été explorés :</p>
+        <ul class="themes">
+          <li data-en="Demographics">Démographie</li>
+          <li data-en="Education">Éducation</li>
+          <li data-en="Health">Santé</li>
+          <li data-en="Economy">Économie</li>
+          <li data-en="Youth">Jeunesse</li>
+          <li data-en="Elders">Seniors</li>
+          <li data-en="Culture">Culture</li>
+          <li data-en="Solidarity">Solidarité</li>
+        </ul>
+        <ol class="etapes">
+          <li class="fait">
+            <span class="etat" data-en="Completed">Terminée</span>
+            <h3 data-en="Data collection">La collecte</h3>
+            <p data-en="Online, with a surveyor or by phone.">En ligne, avec un enquêteur ou par téléphone.</p>
+          </li>
+          <li class="encours">
+            <span class="etat" data-en="In progress">En cours</span>
+            <h3 data-en="Presentation of results">La restitution</h3>
+            <p data-en="First to the General Assembly and to the members.">D'abord à l'Assemblée générale et aux membres.</p>
+          </li>
+          <li class="avenir">
+            <span class="etat" data-en="Upcoming">À venir</span>
+            <h3 data-en="Action plan">Le plan d'actions</h3>
+            <p data-en="The programmes of the coming years, built on what families expressed.">Les programmes des prochaines années, construits sur ce que les familles ont exprimé.</p>
+          </li>
+        </ol>
+        <p class="engagement provisoire" data-en="Results are shared with members before any publication. No personal data will ever be published. Carried out with the technical support of IISS ONG.">Les résultats sont partagés avec les membres avant toute publication. Aucune donnée nominative ne sera jamais publiée. Menée avec l'appui technique d'IISS ONG.</p>
+        <p><a class="bouton doux" href="consultation360/" target="_blank" rel="noopener noreferrer" data-en="See the project page →">Voir la page du projet →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Réalisations et projets : section prévue, visible dans la maquette seulement -->
+  <section class="bloc teinte" id="realisations" data-jalon="Réalisations" data-jalon-en="Achievements">
+    <div class="wrap">
+      <div class="titre-bloc">
+        <p class="eyebrow" data-en="Achievements &amp; projects">Réalisations et projets</p>
+        <h2 data-en="What we have built together">Ce que nous avons construit ensemble</h2>
+      </div>
+      <p class="en-attente">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        <span data-en="Mock-up only: this section will be published only once its content is collected. The three cards below show the expected format.">Maquette seulement : cette section ne sera publiée qu'une fois son contenu collecté. Les trois fiches ci-dessous montrent le format attendu.</span>
+      </p>
+      <div class="fiches">
+        <article class="fiche">
+          <div class="haut"><span data-en="Education">Éducation</span><span>2026</span></div>
+          <h3 data-en="Campus, the study-loan platform">Campus, la plateforme du prêt d'études</h3>
+          <p data-en="Application, loan follow-up and repayment brought together online, for students and for the Education team.">Candidature, suivi du prêt et remboursement réunis en ligne, pour les étudiants et le Pôle Éducation.</p>
+          <div class="pied-fiche"><span class="statut service" data-en="In service">En service</span><span class="exemple" data-en="Example card">Exemple de fiche</span></div>
+        </article>
+        <article class="fiche">
+          <div class="haut"><span data-en="Community">Communauté</span><span>2025-2026</span></div>
+          <h3>Consultation 360°</h3>
+          <p data-en="A survey of families to guide the programmes of the coming years.">Une enquête auprès des familles pour orienter les programmes des prochaines années.</p>
+          <div class="pied-fiche"><span class="statut cours" data-en="Results being presented">Restitution en cours</span><span class="exemple" data-en="Example card">Exemple de fiche</span></div>
+        </article>
+        <article class="fiche">
+          <div class="haut"><span data-en="Community">Communauté</span><span data-en="Date to be added">Date à compléter</span></div>
+          <h3 data-en="Community census">Recensement de la communauté</h3>
+          <p data-en="The groundwork that answered the question “Who are we?”.">Le travail qui a permis de répondre à la question « Qui sommes-nous ? ».</p>
+          <div class="pied-fiche"><span class="statut realise" data-en="Completed">Réalisé</span><span class="exemple" data-en="Example card">Exemple de fiche</span></div>
+        </article>
+      </div>
+      <p class="format" data-en="Format of a card: area of action, period, title, two sentences, status. No names, photos or figures at this stage.">Format d'une fiche : domaine, période, titre, deux phrases, état. Ni nom, ni photo, ni chiffre à ce stade.</p>
+    </div>
+  </section>
+
+  <!-- Espace membres -->
+  <section class="bloc" id="membres" data-jalon="Services en ligne" data-jalon-en="Online services">
+    <div class="wrap">
+      <div class="titre-bloc">
+        <p class="eyebrow" data-en="Direct access">Accès directs</p>
+        <h2 data-en="Our online services">Nos services en ligne</h2>
+      </div>
+      <div class="acces">
+        <a class="porte" href="https://membres.aksiam.mg" target="_blank" rel="noopener noreferrer">
+          <h3 data-en="Member area">Espace membre</h3>
+          <p data-en="Check your situation with the Association.">Consulter votre situation auprès de l'Association.</p>
+          <span class="adresse">membres.aksiam.mg</span>
+          <span class="fleche" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="porte" href="https://campus.aksiam.mg" target="_blank" rel="noopener noreferrer">
+          <h3>Campus</h3>
+          <p data-en="The portal for students in the study-loan programme.">Le portail des étudiants du programme de prêt d'études.</p>
+          <span class="adresse">campus.aksiam.mg</span>
+          <span class="fleche" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="porte" href="consultation360/" target="_blank" rel="noopener noreferrer">
+          <h3>Consultation 360°</h3>
+          <p data-en="The project page: approach, themes and timeline.">La page du projet : démarche, thèmes et calendrier.</p>
+          <span class="adresse">aksiam.mg/consultation360</span>
+          <span class="fleche" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+      <p class="discret" data-en="Member area and Campus: restricted access, an access code is given to you by the Association.">Espace membre et Campus : accès réservé, un code d'accès vous est remis par l'Association.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="bloc teinte" id="contact" data-jalon="Contact" data-jalon-en="Contact">
+    <div class="wrap">
+      <div class="titre-bloc">
+        <p class="eyebrow" data-en="Get in touch">Nous joindre</p>
+        <h2 data-en="Contact">Contact</h2>
+      </div>
+      <div class="contact">
+        <div>
+          <span class="etiquette" data-en="Head office">Siège</span>
+          <span class="valeur" data-en="Ankorondrano Mosque">Mosquée d'Ankorondrano</span>
+          <span>Antananarivo, Madagascar</span>
+        </div>
+        <div>
+          <span class="etiquette" data-en="Email">Courriel</span>
+          <a class="valeur" href="mailto:secretariat@aksiam.mg">secretariat@aksiam.mg</a>
+          <span data-en="Secretariat of the Association">Secrétariat de l'Association</span>
+        </div>
+        <div>
+          <span class="etiquette" data-en="Social media">Réseaux</span>
+          <a class="valeur" href="https://www.youtube.com/@Aksiam24" target="_blank" rel="noopener noreferrer">YouTube · @Aksiam24</a>
+          <a class="valeur" href="https://www.instagram.com/aksiam2023/" target="_blank" rel="noopener noreferrer">Instagram · @aksiam2023</a>
+          <a class="valeur" href="https://www.facebook.com/profile.php?id=61554652256265" target="_blank" rel="noopener noreferrer">Facebook · Aksiam Sports Madagascar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap pied">
+    <div class="ident">
+      <img src="assets/logo-aksiam.webp" alt="">
+      <div>
+        <strong>AKSIAM</strong>
+        <span data-en="Khoja Shia Ithna Asheri Association of Madagascar">Association Khoja Shia Ithna Asheri de Madagascar</span>
+      </div>
+    </div>
+    <nav aria-label="Liens de pied de page">
+      <a href="#association" data-en="The Association">L'Association</a>
+      <a href="#actions" data-en="What we do">Nos actions</a>
+      <a href="#consultation" data-en="360° Consultation">Consultation 360°</a>
+      <a href="#" data-en="Legal notice">Mentions légales</a>
+      <a href="#" data-en="Privacy">Confidentialité</a>
+    </nav>
+    <p class="mention">
+      <span data-en="© 2026 AKSIAM · Religious association · Head office: Ankorondrano Mosque, Antananarivo">© 2026 AKSIAM · Association cultuelle · Siège : Mosquée d'Ankorondrano, Antananarivo</span>
+      <span data-en="Mock-up v1">Maquette v1</span>
+    </p>
+  </div>
+</footer>
+
+<button type="button" class="haut-de-page" id="haut-de-page">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  <span class="visuellement-cache" data-en="Back to top">Retour en haut de page</span>
+</button>
+
+<script>
+/* ===== Calendrier AKSIAM : lecture des fichiers publiés sur GitHub, source unique =====
+   Le site ne copie rien : il lit les mêmes fichiers que les téléphones abonnés. Une date
+   corrigée par l'équipe du calendrier apparaît donc ici sans aucune intervention. */
+var CalendrierAKSIAM = (function () {
+  var SOURCES = {
+    standard: 'https://aksiam-org.github.io/calendrier/calendrier.ics',
+    nuits: 'https://aksiam-org.github.io/calendrier/calendrier_nuit.ics'
+  };
+  // Graphie des mois : celle de la communauté. Une seule table, à valider par le porteur.
+  var MOIS = {
+    MUH: 'Muharram', SFR: 'Safar', RBA: 'Rabi-ul-Awwal', RBT: 'Rabi-uth-Thani',
+    JMO: 'Jamadi-ul-Awwal', JMT: 'Jamadi-uth-Thani', RJB: 'Rajab', SHB: 'Shabaan',
+    RMD: 'Ramadhan', SHW: 'Shawwal', ZQD: 'Zilqad', ZHJ: 'Zilhaj'
+  };
+  // Les dates hégiriennes suivent l'observation à Madagascar : « aujourd'hui » est celui d'Antananarivo
+  var FUSEAU = 'Indian/Antananarivo';
+  var NOIR = '⚫', VERT = '🟢', NUIT = '🌃';
+
+  function sansMarque(t) { return t.split(NOIR).join('').split(VERT).join('').replace(/\s+/g, ' ').trim(); }
+  function nettoyer(t) {
+    return t.replace(/\\,/g, ',').replace(/\\;/g, ';').replace(/\\n/gi, ' ')
+      .replace(/\s+[–—]\s+/g, ' : ')   // aucun tiret long à l'écran
+      .replace(/\s+/g, ' ').trim();
+  }
+  function lireHijri(t) {
+    var m = /(1er|\d+)\s+([A-Z]{3})\s+(\d{4})/.exec(t);
+    return m ? { j: m[1] === '1er' ? 1 : +m[1], mois: m[2], an: +m[3] } : null;
+  }
+  function analyser(texte) {
+    var s = texte.replace(/\r\n/g, '\n').replace(/\n[ \t]/g, '');
+    var jours = {};
+    function jour(cle) { return jours[cle] || (jours[cle] = { hijri: null, lune: '', dates: [], nuits: [] }); }
+    s.split('BEGIN:VEVENT').slice(1).forEach(function (b) {
+      function champ(k) { var m = new RegExp('^' + k + '[^:\\n]*:(.*)$', 'm').exec(b); return m ? m[1].trim() : ''; }
+      var d = champ('DTSTART').slice(0, 8);
+      if (!/^\d{8}$/.test(d)) return;
+      var cle = d.slice(0, 4) + '-' + d.slice(4, 6) + '-' + d.slice(6, 8);
+      var famille = champ('UID').replace(/^\d{8}-/, '').split('@')[0];
+      var resume = nettoyer(champ('SUMMARY'));
+
+      if (/^n\d*$/.test(famille)) {
+        // Rappel du soir : le jour hégirien commence au coucher du soleil. Trois sortes :
+        // la nuit d'un jour (Muharram, Ramadhan), la veille d'une commémoration, un programme (ZAYNABIA).
+        var brut = resume.split(NUIT).join('').trim();
+        var nuitHijri = /^Nuit : (1er|\d+) [A-Z]{3} \d{4}$/.test(brut) ? lireHijri(brut) : null;
+        jour(cle).nuits.push({
+          hijri: nuitHijri,
+          veille: !nuitHijri && /^Nuit : /.test(brut),
+          texte: nuitHijri ? '' : sansMarque(brut.replace(/^Nuit : /, ''))
+        });
+        return;
+      }
+      if (/^c\d*$/.test(famille)) {                      // commémoration
+        var genre = resume.indexOf(NOIR) >= 0 ? 'deuil' : (resume.indexOf(VERT) >= 0 ? 'fete' : 'autre');
+        jour(cle).dates.push({ genre: genre, texte: sansMarque(resume) });
+        return;
+      }
+      var h = lireHijri(resume);                         // jour hégirien (et phases de lune)
+      if (h) {
+        var j = jour(cle); j.hijri = h;
+        var premier = resume.split(' ')[0];
+        j.lune = /\d/.test(premier) || premier === '1er' ? '' : premier;
+      }
+    });
+    var cles = Object.keys(jours).filter(function (k) { return jours[k].hijri; }).sort();
+    return { jours: jours, debut: cles[0], fin: cles[cles.length - 1] };
+  }
+
+  function aujourdhui() {
+    return new Intl.DateTimeFormat('en-CA', { timeZone: FUSEAU, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  }
+  function dateDe(cle) { var p = cle.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2], 12)); }
+  function cleDe(date) { return date.toISOString().slice(0, 10); }
+  function langue() { return document.documentElement.lang === 'en' ? 'en' : 'fr'; }
+  function formatGreg(cle, options) {
+    var t = new Intl.DateTimeFormat(langue() === 'en' ? 'en-GB' : 'fr-FR', Object.assign({ timeZone: 'UTC' }, options)).format(dateDe(cle));
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+  function formatHijri(h, sansAn) {
+    if (!h) return '';
+    var j = h.j === 1 ? (langue() === 'en' ? '1' : '1er') : String(h.j);
+    return j + ' ' + (MOIS[h.mois] || h.mois) + (sansAn ? '' : ' ' + h.an);
+  }
+  function formatNuit(n) {
+    var en = langue() === 'en';
+    if (n.hijri) return (en ? 'This evening: night of ' : 'Ce soir : nuit du ') + formatHijri(n.hijri, true);
+    if (n.veille) return (en ? 'This evening: eve of ' : 'Ce soir : veille de ') + n.texte;
+    return (en ? 'This evening: ' : 'Ce soir : ') + n.texte;
+  }
+  function prochaines(cal, apres, n) {
+    var out = [];
+    Object.keys(cal.jours).sort().forEach(function (k) {
+      if (k > apres) cal.jours[k].dates.forEach(function (d) { out.push({ cle: k, date: d, hijri: cal.jours[k].hijri }); });
+    });
+    return out.slice(0, n);
+  }
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  }
+  function charger(version) {
+    return fetch(SOURCES[version || 'standard'], { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then(analyser);
+  }
+
+  // ---- Abonnement : un geste sur iPhone et Mac, une page sur Google Agenda, les MÊMES adresses ----
+  function copierTexte(t) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function (ok, ko) {
+      var z = document.createElement('textarea'); z.value = t; z.setAttribute('readonly', '');
+      z.style.position = 'fixed'; z.style.opacity = '0'; document.body.appendChild(z); z.select();
+      try { if (document.execCommand('copy')) ok(); else ko(); } catch (e) { ko(e); } finally { document.body.removeChild(z); }
+    });
+  }
+  function abonnement(racine) {
+    if (!racine) return;
+    var version = 'standard';
+    var ios = racine.querySelector('[data-abo="ios"]'), google = racine.querySelector('[data-abo="google"]');
+    var copie = racine.querySelector('[data-abo="copier"]'), lien = racine.querySelector('[data-abo="lien"]');
+    var retour = racine.querySelector('[data-abo="retour"]');
+    function maj() {
+      var url = SOURCES[version];
+      ios.href = url.replace(/^https:/, 'webcal:');
+      google.href = 'https://calendar.google.com/calendar/render?cid=' + encodeURIComponent(url.replace(/^https:/, 'webcal:'));
+      lien.textContent = url.replace(/^https:\/\//, '');
+    }
+    racine.querySelectorAll('[data-version]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        version = b.getAttribute('data-version');
+        racine.querySelectorAll('[data-version]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+        maj();
+      });
+    });
+    copie.addEventListener('click', function () {
+      copierTexte(SOURCES[version]).then(function () {
+        retour.textContent = langue() === 'en' ? 'Link copied' : 'Lien copié';
+      }, function () {
+        retour.textContent = langue() === 'en' ? 'Copy failed: select the link above.' : 'Copie impossible : sélectionnez le lien ci-dessus.';
+      });
+      setTimeout(function () { retour.textContent = ''; }, 3000);
+    });
+    maj();
+  }
+
+  return {
+    SOURCES: SOURCES, MOIS: MOIS, charger: charger, aujourdhui: aujourdhui, dateDe: dateDe, cleDe: cleDe,
+    formatGreg: formatGreg, formatHijri: formatHijri, formatNuit: formatNuit, prochaines: prochaines,
+    esc: esc, langue: langue, abonnement: abonnement
+  };
+})();
+
+</script>
+<script>
+/* ---------- Calendrier de la page d'accueil ---------- */
+(function () {
+  var C = CalendrierAKSIAM, esc = C.esc, bloc = document.getElementById('calendrier');
+  if (!bloc) return;
+  var zone = bloc.querySelector('.cal-jour-contenu'), liste = bloc.querySelector('.cal-liste'), cal = null, echec = false;
+  C.abonnement(document.getElementById('cal-abonnement'));
+  function rendre() {
+    var en = C.langue() === 'en';
+    if (echec) {
+      zone.innerHTML = '<p class="cal-greg">' + (en ? 'The calendar cannot be reached right now. You can still subscribe below.' : 'Le calendrier est momentanément injoignable. Vous pouvez tout de même vous abonner ci-dessous.') + '</p>';
+      liste.innerHTML = '';
+      return;
+    }
+    if (!cal) return;
+    var auj = C.aujourdhui(), j = cal.jours[auj], html = '';
+    if (j && j.hijri) {
+      html += '<p class="cal-hijri">' + (j.lune ? '<span aria-hidden="true">' + j.lune + '</span> ' : '') + esc(C.formatHijri(j.hijri)) + '</p>';
+      html += '<p class="cal-greg">' + esc(C.formatGreg(auj, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })) + '</p>';
+      j.dates.forEach(function (d) { html += '<p class="cal-du-jour"><i class="point ' + d.genre + '" aria-hidden="true"></i><span>' + esc(d.texte) + '</span></p>'; });
+    } else {
+      html += '<p class="cal-greg">' + (en ? 'The calendar for this date has not been published yet.' : "Le calendrier de cette date n'est pas encore publié.") + '</p>';
+    }
+    zone.innerHTML = html;
+    var p = C.prochaines(cal, auj, 4);
+    liste.innerHTML = p.length ? p.map(function (x) {
+      return '<li class="cal-item"><i class="point ' + x.date.genre + '" aria-hidden="true"></i><span class="cal-nom">' + esc(x.date.texte) + '</span>' +
+        '<span class="cal-quand">' + esc(C.formatGreg(x.cle, { weekday: 'long', day: 'numeric', month: 'long' })) + ' · <span class="insecable">' + esc(C.formatHijri(x.hijri, true)) + '</span></span></li>';
+    }).join('') : '<li class="cal-quand">' + (en ? 'No upcoming date in the published calendar.' : 'Aucune date à venir dans le calendrier publié.') + '</li>';
+    window.dispatchEvent(new Event('resize'));   // les jalons de la barre suivent la nouvelle hauteur
+  }
+  C.charger('standard').then(function (c) { cal = c; rendre(); }, function () { echec = true; rendre(); });
+  document.addEventListener('aksiam:langue', rendre);
+})();
+</script>
+
+<script>
+(function () {
+  var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Liens externes : annoncés comme ouvrant un nouvel onglet ----------
+     Reposé après chaque changement de langue, qui remplace le contenu des liens traduits. */
+  function annoter(lang) {
+    document.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+      var m = a.querySelector('.nouvel-onglet');
+      if (!m) {
+        m = document.createElement('span');
+        m.className = 'visuellement-cache nouvel-onglet';
+        a.appendChild(m);
+      }
+      m.textContent = lang === 'en' ? ' (opens in a new tab)' : ' (nouvel onglet)';
+    });
+  }
+
+  /* ---------- Bascule FR / EN : le français est dans la page, l'anglais dans data-en ---------- */
+  var traduits = document.querySelectorAll('[data-en]');
+  traduits.forEach(function (el) { el.dataset.fr = el.innerHTML; });
+
+  function appliquer(lang) {
+    traduits.forEach(function (el) { el.innerHTML = el.dataset[lang] || el.dataset.fr; });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.langues button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('aksiam-langue', lang); } catch (e) {}
+    annoter(lang);
+    document.dispatchEvent(new CustomEvent('aksiam:langue', { detail: lang }));
+    placer();
+    majDiffere();
+  }
+
+  /* ---------- Barre de progression, jalons et rubrique en cours ---------- */
+  var barre = document.querySelector('.progression');
+  var rempli = barre.querySelector('.rempli');
+  var bouton = document.getElementById('haut-de-page');
+  var nav = document.querySelector('nav.ancres');
+  var liens = {};
+  nav.querySelectorAll('a').forEach(function (a) { liens[a.getAttribute('href').slice(1)] = a; });
+  var rubriques = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  // La barre reste masquée aux lecteurs d'écran : le sommaire est la navigation de référence,
+  // les jalons sont un raccourci pour la souris et le doigt (d'où tabindex -1).
+  var jalons = rubriques.map(function (r) {
+    var j = document.createElement('button');
+    j.type = 'button';
+    j.className = 'etape';
+    j.tabIndex = -1;
+    j.addEventListener('click', function () {
+      r.scrollIntoView({ behavior: reduit ? 'instant' : 'smooth', block: 'start' });
+      if (reduit) maj();
+    });
+    j.addEventListener('mouseenter', function () { montrer(jalons.indexOf(j), false); });
+    j.addEventListener('mouseleave', function () { cacher(); });
+    barre.appendChild(j);
+    return j;
+  });
+  var etiquette = document.createElement('span');
+  etiquette.className = 'etiquette';
+  barre.appendChild(etiquette);
+
+  function nomDe(r) {
+    var en = document.documentElement.lang === 'en';
+    return (en && r.dataset.jalonEn) || r.dataset.jalon || r.id;
+  }
+  var minuterie = null;
+  function montrer(i, temporaire) {
+    if (i < 0) return;
+    clearTimeout(minuterie);
+    etiquette.textContent = nomDe(rubriques[i]);
+    // Centrée sur le point, mais jamais hors de la barre
+    var largeurBarre = barre.clientWidth;
+    var x = parseFloat(jalons[i].style.left) / 100 * largeurBarre;
+    var l = etiquette.offsetWidth;
+    etiquette.style.left = Math.max(8, Math.min(largeurBarre - l - 8, x - l / 2)) + 'px';
+    jalons.forEach(function (j, k) { j.classList.toggle('montre', k === i); });
+    etiquette.classList.add('visible');
+    if (temporaire) minuterie = setTimeout(cacher, 1800);
+  }
+  function cacher() {
+    etiquette.classList.remove('visible');
+    jalons.forEach(function (j) { j.classList.remove('montre'); });
+  }
+  var dernierActif = undefined;
+
+  function hauteurUtile() { return document.documentElement.scrollHeight - window.innerHeight; }
+
+  var entete = document.querySelector('header.site');
+  function seuil() { return entete.offsetHeight + 24; }
+
+  function placer() {
+    // La marge d'arrivée sur une ancre suit la hauteur réelle de l'en-tête (deux lignes sur téléphone)
+    document.documentElement.style.scrollPaddingTop = (entete.offsetHeight + 8) + 'px';
+    var max = hauteurUtile();
+    rubriques.forEach(function (r, i) {
+      var y = max > 0 ? Math.min(1, Math.max(0, (r.offsetTop - 100) / max)) : 0;
+      jalons[i].style.left = (y * 100) + '%';
+    });
+  }
+
+  function maj() {
+    var max = hauteurUtile();
+    var y = window.scrollY;
+    rempli.style.width = (max > 0 ? Math.min(100, (y / max) * 100) : 0) + '%';
+
+    var actif = null;
+    rubriques.forEach(function (r, i) {
+      var atteinte = r.getBoundingClientRect().top <= seuil();
+      jalons[i].classList.toggle('passee', atteinte);
+      if (atteinte) actif = r.id;
+    });
+    if (max > 0 && y >= max - 4 && rubriques.length) actif = rubriques[rubriques.length - 1].id;
+
+    // Chaque rubrique atteinte s'annonce un instant sous son jalon (pas au chargement)
+    if (dernierActif !== undefined && actif && actif !== dernierActif) {
+      montrer(rubriques.map(function (r) { return r.id; }).indexOf(actif), true);
+    }
+    dernierActif = actif;
+
+    Object.keys(liens).forEach(function (id) {
+      if (id === actif) liens[id].setAttribute('aria-current', 'true');
+      else liens[id].removeAttribute('aria-current');
+    });
+    // Sur téléphone, le sommaire défile de lui-même jusqu'à la rubrique en cours
+    if (actif && liens[actif] && nav.scrollWidth > nav.clientWidth) {
+      var ecart = liens[actif].getBoundingClientRect().left - nav.getBoundingClientRect().left - 16;
+      if (Math.abs(ecart) > 2) nav.scrollLeft += ecart;
+    }
+    bouton.classList.toggle('visible', y > 600);
+  }
+
+  // Appel direct : requestAnimationFrame n'est pas garanti pendant un défilement animé
+  function majDiffere() { maj(); }
+
+  bouton.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduit ? 'auto' : 'smooth' });
+    document.querySelector('.marque').focus({ preventScroll: true });
+  });
+
+  document.querySelectorAll('.langues button').forEach(function (b) {
+    b.addEventListener('click', function () { appliquer(b.dataset.lang); });
+  });
+  window.addEventListener('scroll', majDiffere, { passive: true });
+  window.addEventListener('scrollend', majDiffere);
+  window.addEventListener('hashchange', function () { setTimeout(maj, 600); });
+  window.addEventListener('resize', function () { placer(); majDiffere(); });
+  // Les polices web agrandissent le texte après coup : un lien partagé vers #consultation
+  // atterrirait trop haut. On se recale sur l'ancre (sans animation), sauf si le visiteur
+  // a déjà commencé à défiler lui-même.
+  var visiteurAGuide = false;
+  ['wheel', 'touchstart', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { visiteurAGuide = true; }, { passive: true, once: true });
+  });
+  function recaler() {
+    placer();
+    var cible = location.hash && document.getElementById(location.hash.slice(1));
+    if (cible && !visiteurAGuide) cible.scrollIntoView({ behavior: 'instant', block: 'start' });
+    maj();
+  }
+  window.addEventListener('load', recaler);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(recaler);
+
+  var memorisee = null;
+  try { memorisee = localStorage.getItem('aksiam-langue'); } catch (e) {}
+  if (memorisee === 'en') appliquer('en'); else { annoter('fr'); placer(); maj(); }
+})();
+</script>
+</body>
+</html>

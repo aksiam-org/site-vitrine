@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendrier AKSIAM</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Calendrier chiite de l'AKSIAM : jours hégiriens et commémorations, mis à jour selon l'observation du croissant.">
+<link rel="icon" href="assets/logo-aksiam.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+:root {
+  --bg: #f4f6f2; --surface: #ffffff; --surface-2: #e9efe7; --ink: #1b221e; --ink-2: #445049; --ink-3: #5f6b64;
+  --green: #00843f; --green-logo: #00a84e; --green-soft: #e0f0e5; --orange: #ec9416; --orange-text: #9a5700;
+  --orange-soft: #fdefd9; --anthracite: #2e2e2e; --on-green: #ffffff; --deuil: #2e2e2e; --fete: #00a84e; --autre: #ec9416;
+  --rayon: 18px;
+  --display: "Marcellus", "Cormorant Garamond", Georgia, serif;
+  --text: "Source Sans 3", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1411; --surface: #172019; --surface-2: #1d2822; --ink: #e8eee9; --ink-2: #b4bfb7; --ink-3: #95a199;
+    --green: #45c882; --green-logo: #45c882; --green-soft: #183624; --orange: #f2a53a; --orange-text: #f5b75e;
+    --orange-soft: #372810; --on-green: #0b1a11; --deuil: #d9ded9; --fete: #45c882; --autre: #f2a53a;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1411; --surface: #172019; --surface-2: #1d2822; --ink: #e8eee9; --ink-2: #b4bfb7; --ink-3: #95a199;
+  --green: #45c882; --green-logo: #45c882; --green-soft: #183624; --orange: #f2a53a; --orange-text: #f5b75e;
+  --orange-soft: #372810; --on-green: #0b1a11; --deuil: #d9ded9; --fete: #45c882; --autre: #f2a53a;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 112.5%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.6 var(--text); -webkit-font-smoothing: antialiased; }
+a { color: var(--green); text-underline-offset: 4px; }
+button { font: inherit; color: inherit; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.12; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.wrap { width: min(1180px, 100%); margin-inline: auto; padding-inline: 20px; }
+.eyebrow { font-size: 0.875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange-text); }
+.visuellement-cache { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* En-tête */
+header.site { background: var(--bg); }
+.entete { display: flex; align-items: center; gap: 16px; min-height: 76px; }
+.marque { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.marque img { width: 48px; height: 48px; border-radius: 50%; background: #fff; padding: 2px; }
+.marque strong { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.12em; font-weight: 400; }
+.langues { margin-left: auto; display: inline-flex; border-radius: 999px; padding: 3px; background: var(--surface-2); }
+.langues button { font-weight: 700; font-size: 0.875rem; letter-spacing: 0.06em; border: 0; background: transparent; color: var(--ink-2); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.langues button[aria-pressed="true"] { background: var(--green); color: var(--on-green); }
+
+/* Titre */
+.titre { padding-block: 40px 28px; display: grid; gap: 12px; }
+.titre h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); }
+.titre p.sous { color: var(--ink-2); font-size: 1.1rem; max-width: 44em; }
+.aujourdhui { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; background: var(--green-soft); border-radius: var(--rayon); padding: 14px 22px; margin-top: 8px; justify-self: start; }
+.aujourdhui .h { font-family: var(--display); font-size: 1.6rem; color: var(--green); }
+.aujourdhui .g { color: var(--ink-2); }
+
+/* Barre de navigation du mois */
+.commandes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-bottom: 18px; }
+.mois-nav { display: flex; align-items: center; gap: 10px; }
+.rond { width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--surface); color: var(--green); cursor: pointer; display: grid; place-items: center; }
+.rond:hover { background: var(--green-soft); }
+.mois-titre { min-width: 11em; }
+.mois-titre h2 { font-size: clamp(1.7rem, 3.5vw, 2.3rem); }
+.mois-titre p { color: var(--orange-text); font-weight: 700; font-size: 0.95rem; }
+.pastille-bouton { border: 0; border-radius: 999px; padding: 10px 18px; font-weight: 700; cursor: pointer; background: var(--surface); color: var(--green); }
+.pastille-bouton:hover { background: var(--green-soft); }
+.bascule { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 600; color: var(--ink-2); margin-left: auto; }
+.bascule input { width: 22px; height: 22px; accent-color: var(--green); }
+
+/* Grille + détail */
+.corps { display: grid; grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 22px; align-items: start; }
+.grille { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.jsem { text-align: center; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); padding-bottom: 4px; }
+.jour {
+  position: relative; min-height: 104px; border: 0; border-radius: 14px; background: var(--surface); padding: 10px 10px 12px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; cursor: pointer; overflow: hidden;
+}
+.jour:hover { background: var(--green-soft); }
+.jour.vide { background: transparent; cursor: default; }
+.jour .g { font-weight: 700; font-size: 1.15rem; line-height: 1; }
+.jour .h { font-size: 0.9rem; color: var(--ink-3); line-height: 1.2; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.jour .h.debut { color: var(--orange-text); font-weight: 700; white-space: normal; overflow-wrap: anywhere; }
+.jour .marques { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; align-items: center; min-height: 12px; }
+.point { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.point.deuil { background: var(--deuil); } .point.fete { background: var(--fete); } .point.autre { background: var(--autre); }
+.jour .soir { font-size: 0.85rem; line-height: 1; }
+.jour .lune { position: absolute; top: 8px; right: 8px; font-size: 0.9rem; }
+.jour.aujourdhui-j { background: var(--green-soft); }
+.jour.aujourdhui-j .g { color: var(--green); }
+.jour.choisi { background: var(--green); color: var(--on-green); }
+.jour.choisi .g, .jour.choisi.aujourdhui-j .g { color: var(--on-green); }
+.jour.choisi .h, .jour.choisi .h.debut { color: var(--on-green); opacity: 0.9; }
+.jour.choisi .point.deuil { background: var(--on-green); }
+.hors-donnees { grid-column: 1 / -1; background: var(--orange-soft); color: var(--orange-text); border-radius: 14px; padding: 12px 16px; font-weight: 600; }
+
+.detail { background: var(--surface); border-radius: var(--rayon); padding: 26px; display: grid; gap: 14px; position: sticky; top: 16px; }
+.detail .d-g { font-family: var(--display); font-size: 1.6rem; line-height: 1.2; }
+.detail .d-h { color: var(--green); font-weight: 700; font-size: 1.1rem; }
+.detail ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.evt { display: flex; gap: 12px; align-items: flex-start; }
+.evt .point { margin-top: 8px; }
+.evt.soir-evt { color: var(--ink-2); }
+.detail .rien { color: var(--ink-3); }
+
+/* Liste du mois */
+.liste-mois { margin-top: 36px; }
+.liste-mois h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 16px; }
+.liste-mois ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.liste-mois li button {
+  width: 100%; text-align: left; border: 0; border-radius: 14px; background: var(--surface); padding: 16px 18px; cursor: pointer;
+  display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: start;
+}
+.liste-mois li button:hover { background: var(--green-soft); }
+.liste-mois .point { margin-top: 8px; grid-row: span 2; }
+.liste-mois .nom { font-weight: 700; }
+.liste-mois .quand { color: var(--ink-3); font-size: 0.95rem; }
+.insecable { white-space: nowrap; }
+
+.legende { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; color: var(--ink-2); font-size: 0.95rem; }
+.legende span { display: inline-flex; align-items: center; gap: 8px; }
+
+/* Abonnement */
+.abonnement { margin-block: 48px 64px; background: var(--surface-2); border-radius: var(--rayon); padding: 32px; display: grid; gap: 18px; }
+.abonnement h2 { font-size: clamp(1.7rem, 3.2vw, 2.3rem); }
+.abonnement .sous { color: var(--ink-2); max-width: 46em; }
+.versions { display: inline-flex; flex-wrap: wrap; gap: 6px; background: var(--surface); border-radius: 999px; padding: 4px; justify-self: start; }
+.versions button { border: 0; background: transparent; border-radius: 999px; padding: 9px 16px; font-weight: 700; cursor: pointer; color: var(--ink-2); }
+.versions button[aria-pressed="true"] { background: var(--green); color: var(--on-green); }
+.actions-abo { display: flex; flex-wrap: wrap; gap: 12px; }
+.bouton { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; padding: 14px 22px; border-radius: 999px; border: 0; cursor: pointer; }
+.bouton.plein { background: var(--green); color: var(--on-green); }
+.bouton.doux { background: var(--surface); color: var(--green); }
+.lien-brut { font-size: 0.95rem; color: var(--ink-3); word-break: break-all; }
+.retour { color: var(--green); font-weight: 700; min-height: 1.6em; }
+details.guide { background: var(--surface); border-radius: 14px; padding: 16px 20px; }
+details.guide summary { cursor: pointer; font-weight: 700; color: var(--green); }
+details.guide h3 { font-family: var(--text); font-weight: 700; font-size: 1.05rem; margin-top: 16px; }
+details.guide ol { margin: 8px 0 0; padding-left: 1.3em; color: var(--ink-2); display: grid; gap: 4px; }
+.attention { background: var(--orange-soft); color: var(--orange-text); border-radius: 12px; padding: 10px 14px; margin-top: 10px; font-weight: 600; }
+
+footer.site { background: var(--anthracite); color: #c9d0ca; padding-block: 28px; font-size: 0.95rem; }
+footer.site a { color: #e8ece8; }
+
+.etat { background: var(--surface); border-radius: 14px; padding: 16px 20px; color: var(--ink-2); }
+
+@media (max-width: 900px) {
+  .corps { grid-template-columns: 1fr; }
+  .detail { position: static; }
+}
+@media (max-width: 620px) {
+  .grille { gap: 4px; }
+  .jour { min-height: 64px; padding: 7px 5px 8px; border-radius: 10px; align-items: center; text-align: center; }
+  .jour .g { font-size: 1rem; }
+  .jour .h { font-size: 0.8rem; }
+  .jour .h.debut { font-size: 0.8rem; }
+  .jour .h .h-m { display: none; }
+  .versions { border-radius: 16px; }
+  .jour .marques { justify-content: center; }
+  .jour .lune { display: none; }
+  .point { width: 8px; height: 8px; }
+  .jsem { font-size: 0.75rem; letter-spacing: 0; }
+  .bascule { margin-left: 0; }
+  .abonnement { padding: 24px; }
+  .marque strong { font-size: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap entete">
+    <a class="marque" href="../" target="_blank" rel="noopener noreferrer">
+      <img src="assets/logo-aksiam.webp" alt="">
+      <strong>AKSIAM</strong>
+    </a>
+    <div class="langues" role="group" aria-label="Langue / Language">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="titre">
+    <p class="eyebrow" data-en="Shia calendar">Calendrier chiite</p>
+    <h1 data-en="The AKSIAM calendar">Le calendrier de l'AKSIAM</h1>
+    <p class="sous" data-en="Hijri days and commemorations, updated according to the sighting of the crescent moon.">Jours hégiriens et commémorations, mis à jour selon l'observation du croissant.</p>
+    <p class="aujourdhui" id="aujourdhui" hidden></p>
+  </section>
+
+  <div class="etat" id="etat" data-en="Loading the calendar…">Chargement du calendrier…</div>
+
+  <div id="calendrier" hidden>
+    <div class="commandes">
+      <div class="mois-nav">
+        <button type="button" class="rond" id="precedent"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span class="visuellement-cache" data-en="Previous month">Mois précédent</span></button>
+        <div class="mois-titre" aria-live="polite"><h2 id="mois-nom"></h2><p id="mois-hijri"></p></div>
+        <button type="button" class="rond" id="suivant"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="visuellement-cache" data-en="Next month">Mois suivant</span></button>
+      </div>
+      <button type="button" class="pastille-bouton" id="retour-auj" data-en="Today">Aujourd'hui</button>
+      <label class="bascule"><input type="checkbox" id="nuits"> <span data-en="Show evening reminders">Afficher les rappels du soir</span></label>
+    </div>
+
+    <div class="corps">
+      <div>
+        <div class="grille" id="grille" role="grid"></div>
+        <div class="legende" aria-hidden="true">
+          <span><i class="point deuil"></i><span data-en="Mourning">Deuil</span></span>
+          <span><i class="point fete"></i><span data-en="Celebration">Fête</span></span>
+          <span><i class="point autre"></i><span data-en="Other date">Autre date</span></span>
+          <span>🌟 <span data-en="Birth">Naissance</span></span>
+          <span>🌃 <span data-en="Evening reminder">Rappel du soir</span></span>
+        </div>
+      </div>
+      <aside class="detail" id="detail" aria-live="polite"></aside>
+    </div>
+
+    <section class="liste-mois">
+      <h2 data-en="This month">Ce mois-ci</h2>
+      <ol id="liste"></ol>
+    </section>
+  </div>
+
+  <section class="abonnement" id="abonnement">
+    <p class="eyebrow" data-en="On your phone">Sur votre téléphone</p>
+    <h2 data-en="Subscribe once, receive every correction">Abonnez-vous une fois, recevez chaque correction</h2>
+    <p class="sous" data-en="When a date is corrected after the crescent is sighted, it reaches your phone on its own. No need to reinstall anything.">Quand une date est corrigée après l'observation du croissant, elle arrive toute seule dans votre téléphone. Rien à réinstaller.</p>
+    <div class="versions" role="group" aria-label="Version">
+      <button type="button" data-version="standard" aria-pressed="true" data-en="Standard">Standard</button>
+      <button type="button" data-version="nuits" aria-pressed="false" data-en="With evening reminders">Avec rappels du soir</button>
+    </div>
+    <div class="actions-abo">
+      <a class="bouton plein" data-abo="ios" href="#" data-en="Subscribe on iPhone or Mac">S'abonner sur iPhone ou Mac</a>
+      <a class="bouton doux" data-abo="google" href="https://calendar.google.com/" target="_blank" rel="noopener noreferrer" data-en="Add to Google Calendar">Ajouter à Google Agenda</a>
+      <button type="button" class="bouton doux" data-abo="copier" data-en="Copy the link">Copier le lien</button>
+    </div>
+    <p class="lien-brut" data-abo="lien"></p>
+    <p class="retour" data-abo="retour" aria-live="polite"></p>
+    <details class="guide">
+      <summary data-en="Step by step, and the home screen widget">Pas à pas, et le widget d'écran d'accueil</summary>
+      <h3 data-en="iPhone and iPad">iPhone et iPad</h3>
+      <ol>
+        <li data-en="Tap “Subscribe on iPhone or Mac”.">Touchez « S'abonner sur iPhone ou Mac ».</li>
+        <li data-en="Confirm the subscription: that's all.">Confirmez l'abonnement : c'est tout.</li>
+        <li data-en="For the widget: long press on the home screen, tap +, choose Calendar.">Pour le widget : appui long sur l'écran d'accueil, touchez +, choisissez Calendrier.</li>
+      </ol>
+      <h3 data-en="Android (once, from a computer)">Android (une seule fois, depuis un ordinateur)</h3>
+      <ol>
+        <li data-en="Click “Add to Google Calendar”, then confirm.">Cliquez sur « Ajouter à Google Agenda », puis confirmez.</li>
+        <li data-en="On your phone, open Google Calendar, menu ☰, then Settings.">Sur le téléphone, ouvrez Google Agenda, menu ☰, puis Paramètres.</li>
+        <li data-en="Tick the AKSIAM calendar: it is unticked by default.">Cochez le calendrier AKSIAM : il est décoché par défaut.</li>
+        <li data-en="For the widget: long press on the home screen, Widgets, Calendar.">Pour le widget : appui long sur l'écran d'accueil, Widgets, Agenda.</li>
+      </ol>
+      <p class="attention" data-en="Without ticking it on Android, no update will ever arrive. Updates can then take up to 24 hours (a Google limit).">Sans cette case cochée sur Android, aucune mise à jour n'arrivera jamais. Les mises à jour peuvent ensuite prendre jusqu'à 24 heures (limite de Google).</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap" data-en="© 2026 AKSIAM · Khoja Shia Ithna Asheri Association of Madagascar">© 2026 AKSIAM · Association Khoja Shia Ithna Asheri de Madagascar</div>
+</footer>
+
+<script>
+/* ===== Calendrier AKSIAM : lecture des fichiers publiés sur GitHub, source unique =====
+   Le site ne copie rien : il lit les mêmes fichiers que les téléphones abonnés. Une date
+   corrigée par l'équipe du calendrier apparaît donc ici sans aucune intervention. */
+var CalendrierAKSIAM = (function () {
+  var SOURCES = {
+    standard: 'https://aksiam-org.github.io/calendrier/calendrier.ics',
+    nuits: 'https://aksiam-org.github.io/calendrier/calendrier_nuit.ics'
+  };
+  // Graphie des mois : celle de la communauté. Une seule table, à valider par le porteur.
+  var MOIS = {
+    MUH: 'Muharram', SFR: 'Safar', RBA: 'Rabi-ul-Awwal', RBT: 'Rabi-uth-Thani',
+    JMO: 'Jamadi-ul-Awwal', JMT: 'Jamadi-uth-Thani', RJB: 'Rajab', SHB: 'Shabaan',
+    RMD: 'Ramadhan', SHW: 'Shawwal', ZQD: 'Zilqad', ZHJ: 'Zilhaj'
+  };
+  // Les dates hégiriennes suivent l'observation à Madagascar : « aujourd'hui » est celui d'Antananarivo
+  var FUSEAU = 'Indian/Antananarivo';
+  var NOIR = '⚫', VERT = '🟢', NUIT = '🌃';
+
+  function sansMarque(t) { return t.split(NOIR).join('').split(VERT).join('').replace(/\s+/g, ' ').trim(); }
+  function nettoyer(t) {
+    return t.replace(/\\,/g, ',').replace(/\\;/g, ';').replace(/\\n/gi, ' ')
+      .replace(/\s+[–—]\s+/g, ' : ')   // aucun tiret long à l'écran
+      .replace(/\s+/g, ' ').trim();
+  }
+  function lireHijri(t) {
+    var m = /(1er|\d+)\s+([A-Z]{3})\s+(\d{4})/.exec(t);
+    return m ? { j: m[1] === '1er' ? 1 : +m[1], mois: m[2], an: +m[3] } : null;
+  }
+  function analyser(texte) {
+    var s = texte.replace(/\r\n/g, '\n').replace(/\n[ \t]/g, '');
+    var jours = {};
+    function jour(cle) { return jours[cle] || (jours[cle] = { hijri: null, lune: '', dates: [], nuits: [] }); }
+    s.split('BEGIN:VEVENT').slice(1).forEach(function (b) {
+      function champ(k) { var m = new RegExp('^' + k + '[^:\\n]*:(.*)$', 'm').exec(b); return m ? m[1].trim() : ''; }
+      var d = champ('DTSTART').slice(0, 8);
+      if (!/^\d{8}$/.test(d)) return;
+      var cle = d.slice(0, 4) + '-' + d.slice(4, 6) + '-' + d.slice(6, 8);
+      var famille = champ('UID').replace(/^\d{8}-/, '').split('@')[0];
+      var resume = nettoyer(champ('SUMMARY'));
+
+      if (/^n\d*$/.test(famille)) {
+        // Rappel du soir : le jour hégirien commence au coucher du soleil. Trois sortes :
+        // la nuit d'un jour (Muharram, Ramadhan), la veille d'une commémoration, un programme (ZAYNABIA).
+        var brut = resume.split(NUIT).join('').trim();
+        var nuitHijri = /^Nuit : (1er|\d+) [A-Z]{3} \d{4}$/.test(brut) ? lireHijri(brut) : null;
+        jour(cle).nuits.push({
+          hijri: nuitHijri,
+          veille: !nuitHijri && /^Nuit : /.test(brut),
+          texte: nuitHijri ? '' : sansMarque(brut.replace(/^Nuit : /, ''))
+        });
+        return;
+      }
+      if (/^c\d*$/.test(famille)) {                      // commémoration
+        var genre = resume.indexOf(NOIR) >= 0 ? 'deuil' : (resume.indexOf(VERT) >= 0 ? 'fete' : 'autre');
+        jour(cle).dates.push({ genre: genre, texte: sansMarque(resume) });
+        return;
+      }
+      var h = lireHijri(resume);                         // jour hégirien (et phases de lune)
+      if (h) {
+        var j = jour(cle); j.hijri = h;
+        var premier = resume.split(' ')[0];
+        j.lune = /\d/.test(premier) || premier === '1er' ? '' : premier;
+      }
+    });
+    var cles = Object.keys(jours).filter(function (k) { return jours[k].hijri; }).sort();
+    return { jours: jours, debut: cles[0], fin: cles[cles.length - 1] };
+  }
+
+  function aujourdhui() {
+    return new Intl.DateTimeFormat('en-CA', { timeZone: FUSEAU, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  }
+  function dateDe(cle) { var p = cle.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2], 12)); }
+  function cleDe(date) { return date.toISOString().slice(0, 10); }
+  function langue() { return document.documentElement.lang === 'en' ? 'en' : 'fr'; }
+  function formatGreg(cle, options) {
+    var t = new Intl.DateTimeFormat(langue() === 'en' ? 'en-GB' : 'fr-FR', Object.assign({ timeZone: 'UTC' }, options)).format(dateDe(cle));
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+  function formatHijri(h, sansAn) {
+    if (!h) return '';
+    var j = h.j === 1 ? (langue() === 'en' ? '1' : '1er') : String(h.j);
+    return j + ' ' + (MOIS[h.mois] || h.mois) + (sansAn ? '' : ' ' + h.an);
+  }
+  function formatNuit(n) {
+    var en = langue() === 'en';
+    if (n.hijri) return (en ? 'This evening: night of ' : 'Ce soir : nuit du ') + formatHijri(n.hijri, true);
+    if (n.veille) return (en ? 'This evening: eve of ' : 'Ce soir : veille de ') + n.texte;
+    return (en ? 'This evening: ' : 'Ce soir : ') + n.texte;
+  }
+  function prochaines(cal, apres, n) {
+    var out = [];
+    Object.keys(cal.jours).sort().forEach(function (k) {
+      if (k > apres) cal.jours[k].dates.forEach(function (d) { out.push({ cle: k, date: d, hijri: cal.jours[k].hijri }); });
+    });
+    return out.slice(0, n);
+  }
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  }
+  function charger(version) {
+    return fetch(SOURCES[version || 'standard'], { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then(analyser);
+  }
+
+  // ---- Abonnement : un geste sur iPhone et Mac, une page sur Google Agenda, les MÊMES adresses ----
+  function copierTexte(t) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function (ok, ko) {
+      var z = document.createElement('textarea'); z.value = t; z.setAttribute('readonly', '');
+      z.style.position = 'fixed'; z.style.opacity = '0'; document.body.appendChild(z); z.select();
+      try { if (document.execCommand('copy')) ok(); else ko(); } catch (e) { ko(e); } finally { document.body.removeChild(z); }
+    });
+  }
+  function abonnement(racine) {
+    if (!racine) return;
+    var version = 'standard';
+    var ios = racine.querySelector('[data-abo="ios"]'), google = racine.querySelector('[data-abo="google"]');
+    var copie = racine.querySelector('[data-abo="copier"]'), lien = racine.querySelector('[data-abo="lien"]');
+    var retour = racine.querySelector('[data-abo="retour"]');
+    function maj() {
+      var url = SOURCES[version];
+      ios.href = url.replace(/^https:/, 'webcal:');
+      google.href = 'https://calendar.google.com/calendar/render?cid=' + encodeURIComponent(url.replace(/^https:/, 'webcal:'));
+      lien.textContent = url.replace(/^https:\/\//, '');
+    }
+    racine.querySelectorAll('[data-version]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        version = b.getAttribute('data-version');
+        racine.querySelectorAll('[data-version]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+        maj();
+      });
+    });
+    copie.addEventListener('click', function () {
+      copierTexte(SOURCES[version]).then(function () {
+        retour.textContent = langue() === 'en' ? 'Link copied' : 'Lien copié';
+      }, function () {
+        retour.textContent = langue() === 'en' ? 'Copy failed: select the link above.' : 'Copie impossible : sélectionnez le lien ci-dessus.';
+      });
+      setTimeout(function () { retour.textContent = ''; }, 3000);
+    });
+    maj();
+  }
+
+  return {
+    SOURCES: SOURCES, MOIS: MOIS, charger: charger, aujourdhui: aujourdhui, dateDe: dateDe, cleDe: cleDe,
+    formatGreg: formatGreg, formatHijri: formatHijri, formatNuit: formatNuit, prochaines: prochaines,
+    esc: esc, langue: langue, abonnement: abonnement
+  };
+})();
+
+</script>
+<script>
+(function () {
+  var C = CalendrierAKSIAM, esc = C.esc;
+
+  /* ---------- Langue (même mémoire que la page d'accueil) ---------- */
+  var traduits = document.querySelectorAll('[data-en]');
+  traduits.forEach(function (el) { el.dataset.fr = el.innerHTML; });
+  function annoter(lang) {
+    document.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+      var m = a.querySelector('.nouvel-onglet');
+      if (!m) { m = document.createElement('span'); m.className = 'visuellement-cache nouvel-onglet'; a.appendChild(m); }
+      m.textContent = lang === 'en' ? ' (opens in a new tab)' : ' (nouvel onglet)';
+    });
+  }
+  function appliquer(lang) {
+    traduits.forEach(function (el) { el.innerHTML = el.dataset[lang] || el.dataset.fr; });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.langues button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
+    try { localStorage.setItem('aksiam-langue', lang); } catch (e) {}
+    annoter(lang);
+    rendre();
+  }
+  document.querySelectorAll('.langues button').forEach(function (b) { b.addEventListener('click', function () { appliquer(b.dataset.lang); }); });
+
+  /* ---------- Calendrier ---------- */
+  var cal = null, auj = C.aujourdhui(), choisi = auj, avecNuits = false;
+  var vue = { an: +auj.slice(0, 4), mois: +auj.slice(5, 7) - 1 };
+  var el = function (id) { return document.getElementById(id); };
+  function en() { return C.langue() === 'en'; }
+
+  function joursSemaine() {
+    var base = Date.UTC(2024, 0, 1, 12);   // un lundi
+    return [0, 1, 2, 3, 4, 5, 6].map(function (i) {
+      return new Intl.DateTimeFormat(en() ? 'en-GB' : 'fr-FR', { weekday: 'short', timeZone: 'UTC' }).format(new Date(base + i * 864e5)).replace('.', '');
+    });
+  }
+  function cleMois(an, mois, j) { return an + '-' + String(mois + 1).padStart(2, '0') + '-' + String(j).padStart(2, '0'); }
+
+  function rendreDetail() {
+    var j = cal.jours[choisi], d = el('detail');
+    var html = '<p class="eyebrow">' + (choisi === auj ? (en() ? 'Today' : "Aujourd'hui") : (en() ? 'Selected day' : 'Jour choisi')) + '</p>' +
+      '<p class="d-g">' + esc(C.formatGreg(choisi, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })) + '</p>';
+    if (j && j.hijri) html += '<p class="d-h">' + (j.lune ? j.lune + ' ' : '') + esc(C.formatHijri(j.hijri)) + '</p>';
+    var items = [];
+    if (j) {
+      j.dates.forEach(function (x) { items.push('<li class="evt"><i class="point ' + x.genre + '" aria-hidden="true"></i><span>' + esc(x.texte) + '</span></li>'); });
+      if (avecNuits) j.nuits.forEach(function (n) { items.push('<li class="evt soir-evt"><span aria-hidden="true">🌃</span><span>' + esc(C.formatNuit(n)) + '</span></li>'); });
+    }
+    html += items.length ? '<ul>' + items.join('') + '</ul>' : '<p class="rien">' + (j && j.hijri ? (en() ? 'No commemoration on this day.' : 'Aucune commémoration ce jour-là.') : (en() ? 'This date is outside the published calendar.' : 'Cette date est hors du calendrier publié.')) + '</p>';
+    d.innerHTML = html;
+  }
+
+  function rendre() {
+    if (!cal) return;
+    // Aujourd'hui, en tête de page
+    var ja = cal.jours[auj], a = el('aujourdhui');
+    if (ja && ja.hijri) {
+      a.hidden = false;
+      a.innerHTML = '<span class="h">' + (ja.lune ? ja.lune + ' ' : '') + esc(C.formatHijri(ja.hijri)) + '</span><span class="g">' + esc(C.formatGreg(auj, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })) + '</span>';
+    } else a.hidden = true;
+
+    // Titre du mois et mois hégiriens couverts
+    var premier = cleMois(vue.an, vue.mois, 1);
+    el('mois-nom').textContent = C.formatGreg(premier, { month: 'long', year: 'numeric' });
+    var nbJours = new Date(Date.UTC(vue.an, vue.mois + 1, 0)).getUTCDate();
+    var hij = [], vus = {};
+    for (var k = 1; k <= nbJours; k++) {
+      var jj = cal.jours[cleMois(vue.an, vue.mois, k)];
+      if (jj && jj.hijri && !vus[jj.hijri.mois + jj.hijri.an]) { vus[jj.hijri.mois + jj.hijri.an] = 1; hij.push(jj.hijri); }
+    }
+    el('mois-hijri').textContent = hij.length ? hij.map(function (h) { return C.MOIS[h.mois] || h.mois; }).join(' · ') + ' ' + hij[hij.length - 1].an : '';
+
+    // Grille
+    var g = joursSemaine().map(function (n) { return '<div class="jsem" role="columnheader">' + esc(n) + '</div>'; });
+    var decalage = (new Date(Date.UTC(vue.an, vue.mois, 1)).getUTCDay() + 6) % 7;
+    for (var v = 0; v < decalage; v++) g.push('<div class="jour vide" aria-hidden="true"></div>');
+    var horsDonnees = false;
+    for (var n = 1; n <= nbJours; n++) {
+      var cle = cleMois(vue.an, vue.mois, n), j = cal.jours[cle];
+      if (!j || !j.hijri) horsDonnees = true;
+      var cls = 'jour' + (cle === auj ? ' aujourdhui-j' : '') + (cle === choisi ? ' choisi' : '');
+      var hTxt = j && j.hijri ? String(j.hijri.j) : '';
+      var hHtml = j && j.hijri ? (j.hijri.j === 1 ? esc(en() ? '1' : '1er') + '<span class="h-m"> ' + esc(C.MOIS[j.hijri.mois] || j.hijri.mois) + '</span>' : esc(hTxt)) : '';
+      var marques = j ? j.dates.map(function (x) { return '<i class="point ' + x.genre + '"></i>'; }).join('') : '';
+      if (avecNuits && j && j.nuits.length) marques += '<span class="soir">🌃</span>';
+      var etiquette = C.formatGreg(cle, { weekday: 'long', day: 'numeric', month: 'long' }) + (j && j.hijri ? ', ' + C.formatHijri(j.hijri) : '') +
+        (j && j.dates.length ? ', ' + j.dates.map(function (x) { return x.texte; }).join(' ; ') : '');
+      g.push('<button type="button" class="' + cls + '" data-cle="' + cle + '" aria-label="' + esc(etiquette) + '"' + (cle === choisi ? ' aria-pressed="true"' : '') + '>' +
+        (j && j.lune ? '<span class="lune" aria-hidden="true">' + j.lune + '</span>' : '') +
+        '<span class="g" aria-hidden="true">' + n + '</span>' +
+        '<span class="h' + (j && j.hijri && j.hijri.j === 1 ? ' debut' : '') + '" aria-hidden="true">' + hHtml + '</span>' +
+        '<span class="marques" aria-hidden="true">' + marques + '</span></button>');
+    }
+    if (horsDonnees) g.push('<p class="hors-donnees">' + (premier > cal.fin ?
+      (en() ? 'The calendar for the next year has not been published yet.' : "Le calendrier de l'année suivante n'est pas encore publié.") :
+      (en() ? 'Part of this month is outside the published calendar.' : 'Une partie de ce mois est hors du calendrier publié.')) + '</p>');
+    el('grille').innerHTML = g.join('');
+    el('grille').querySelectorAll('button.jour').forEach(function (b) {
+      b.addEventListener('click', function () { choisi = b.dataset.cle; rendre(); });
+    });
+
+    // Liste du mois
+    var l = [];
+    for (var m = 1; m <= nbJours; m++) {
+      var c2 = cleMois(vue.an, vue.mois, m), j2 = cal.jours[c2];
+      if (j2) j2.dates.forEach(function (x) {
+        l.push('<li><button type="button" data-cle="' + c2 + '"><i class="point ' + x.genre + '" aria-hidden="true"></i><span class="nom">' + esc(x.texte) + '</span>' +
+          '<span class="quand">' + esc(C.formatGreg(c2, { weekday: 'long', day: 'numeric', month: 'long' })) + (j2.hijri ? ' · <span class="insecable">' + esc(C.formatHijri(j2.hijri, true)) + '</span>' : '') + '</span></button></li>');
+      });
+    }
+    el('liste').innerHTML = l.join('') || '<li class="etat">' + (en() ? 'No commemoration this month.' : 'Aucune commémoration ce mois-ci.') + '</li>';
+    el('liste').querySelectorAll('button[data-cle]').forEach(function (b) {
+      b.addEventListener('click', function () { choisi = b.dataset.cle; rendre(); el('detail').scrollIntoView({ block: 'nearest', behavior: 'smooth' }); });
+    });
+    rendreDetail();
+  }
+
+  function deplacer(delta) {
+    vue.mois += delta;
+    if (vue.mois < 0) { vue.mois = 11; vue.an--; }
+    if (vue.mois > 11) { vue.mois = 0; vue.an++; }
+    var cle1 = cleMois(vue.an, vue.mois, 1);
+    choisi = (auj.slice(0, 7) === cle1.slice(0, 7)) ? auj : cle1;
+    rendre();
+  }
+  el('precedent').addEventListener('click', function () { deplacer(-1); });
+  el('suivant').addEventListener('click', function () { deplacer(1); });
+  el('retour-auj').addEventListener('click', function () { vue = { an: +auj.slice(0, 4), mois: +auj.slice(5, 7) - 1 }; choisi = auj; rendre(); });
+  el('nuits').addEventListener('change', function () { avecNuits = this.checked; rendre(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input, textarea')) return;
+    if (e.key === 'ArrowLeft' && e.altKey) deplacer(-1);
+    if (e.key === 'ArrowRight' && e.altKey) deplacer(1);
+  });
+
+  C.abonnement(el('abonnement'));
+
+  // Le fichier « nuits » contient tout le standard, plus les rappels du soir : une seule lecture
+  C.charger('nuits').then(function (c) {
+    cal = c; el('etat').hidden = true; el('calendrier').hidden = false; rendre();
+  }, function () {
+    el('etat').textContent = en() ? 'The calendar cannot be reached right now. You can still subscribe below.' : "Le calendrier est momentanément injoignable. Vous pouvez tout de même vous abonner ci-dessous.";
+  });
+
+  var memorisee = null;
+  try { memorisee = localStorage.getItem('aksiam-langue'); } catch (e) {}
+  if (memorisee === 'en') appliquer('en'); else annoter('fr');
+})();
+</script>
+</body>
+</html>
