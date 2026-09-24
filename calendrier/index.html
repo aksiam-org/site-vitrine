@@ -367,10 +367,12 @@ var CalendrierAKSIAM = (function () {
   function esc(t) {
     return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
   }
+  var lectures = {};
   function charger(version) {
-    return fetch(SOURCES[version || 'standard'], { cache: 'no-cache' })
+    version = version || 'standard';
+    return lectures[version] || (lectures[version] = fetch(SOURCES[version], { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-      .then(analyser);
+      .then(analyser));
   }
 
   // ---- Abonnement : un geste sur iPhone et Mac, une page sur Google Agenda, les MÊMES adresses ----
