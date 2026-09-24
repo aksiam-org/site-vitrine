@@ -83,15 +83,15 @@ header.site {
   position: sticky; top: 0; z-index: 10;
   background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px);
 }
-.entete { display: flex; align-items: center; gap: 20px; min-height: 76px; }
+.entete { display: flex; align-items: center; gap: 14px; min-height: 76px; }
 .marque { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); flex-shrink: 0; }
 .marque .pastille { width: 48px; height: 48px; border-radius: 50%; background: #fff; padding: 2px; }
 .marque strong { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.12em; }
-nav.ancres { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+nav.ancres { display: flex; gap: 0; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
 nav.ancres::-webkit-scrollbar { display: none; }
 nav.ancres a {
-  color: var(--ink-2); text-decoration: none; font-weight: 600; font-size: 0.95rem;
-  padding: 9px 14px; border-radius: 999px; white-space: nowrap; transition: background .2s, color .2s;
+  color: var(--ink-2); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+  padding: 8px 10px; border-radius: 999px; white-space: nowrap; transition: background .2s, color .2s;
 }
 nav.ancres a:hover { color: var(--green); background: var(--green-soft); }
 nav.ancres a[aria-current="true"] { color: var(--on-green); background: var(--green); }
@@ -347,7 +347,7 @@ footer.site .mention { width: 100%; padding-top: 24px; font-size: 0.9rem; color:
 </head>
 <body>
 
-<div class="bandeau" data-en="Mock-up v1 · provisional texts (dashed underline) to be validated · not published">Maquette v1 · textes provisoires (soulignés en pointillé) à valider · non publiée</div>
+<div class="bandeau" data-en="Preview for validation · provisional texts (dotted underline) to be validated">Aperçu de validation · textes provisoires (soulignés en pointillé) à valider</div>
 
 <header class="site">
   <div class="wrap entete">
