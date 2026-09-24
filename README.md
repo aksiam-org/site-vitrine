@@ -9,7 +9,7 @@ Source du site public de l'Association Khoja Shia Ithna Asheri de Madagascar, de
 
 | Chemin | Page |
 |---|---|
-| `index.html` | page d'accueil (présentation, domaines d'action, calendrier, sections, Consultation 360°, services, contact) |
+| `index.html` | page d'accueil (présentation, domaines d'action, éducation en chiffres, calendrier, sections, Consultation 360°, services, contact) |
 | `calendrier/` | calendrier chiite complet, consultable mois par mois |
 | `consultation360/` | page de la Consultation 360° |
 
@@ -37,7 +37,9 @@ Contour de Madagascar : [Natural Earth](https://www.naturalearthdata.com/), doma
 
 ## Règles de rédaction
 
-- Aucun nom, aucune photo, aucun chiffre sur la communauté à ce stade.
+- Aucun nom, aucune photo, aucun chiffre sur la communauté à ce stade. **Seule exception : la rubrique
+  Éducation**, qui affiche deux totaux datés (bourses MAMAS, prêt universitaire). Jamais de détail par
+  section ni par pays : il désignerait des élèves. À mettre à jour une fois par an, à cet endroit seulement.
 - Aucun montant ni critère de décision pour les aides : on explique la démarche, pas le barème.
 - Aucun cadratin ni demi-cadratin dans le texte affiché.
 - Toute page externe s'ouvre dans un nouvel onglet.
