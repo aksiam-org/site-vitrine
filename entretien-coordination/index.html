@@ -298,7 +298,7 @@
     var fichier = null;
     // La marque UTF-8 (BOM) en tête du FICHIER : sans elle, des lecteurs de Windows lisent les accents de travers
     // (vu le 2026-10-07 sur le premier essai d'Assim). Le texte partagé ou copié n'en a pas besoin.
-    try { fichier = new File(["﻿" + texte], nomFichier(), { type: "text/plain;charset=utf-8" }); } catch (e) { fichier = null; }
+    try { fichier = new File(["\uFEFF" + texte], nomFichier(), { type: "text/plain;charset=utf-8" }); } catch (e) { fichier = null; }
     if (navigator.share) {
       var envoi = (fichier && navigator.canShare && navigator.canShare({ files: [fichier] }))
         ? { title: "Entretien avec la coordination", files: [fichier] }
@@ -312,7 +312,7 @@
 
   document.getElementById("telecharger").addEventListener("click", function () {
     var lien = document.createElement("a");
-    lien.href = URL.createObjectURL(new Blob(["﻿" + texteExport()], { type: "text/plain;charset=utf-8" }));
+    lien.href = URL.createObjectURL(new Blob(["\uFEFF" + texteExport()], { type: "text/plain;charset=utf-8" }));
     lien.download = nomFichier();
     document.body.appendChild(lien);
     lien.click();
