@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Entretien coordination</title>
+<style>
+  /* Page autonome : aucune ressource extérieure, elle s'ouvre et s'enregistre sans réseau. */
+  :root {
+    --fond: #f3f5f1;
+    --carte: #ffffff;
+    --encre: #1d2621;
+    --doux: #5b675f;
+    --accent: #1f7a4d;
+    --accent-encre: #ffffff;
+    --teinte: #e3efe6;
+    --champ: #f8faf7;
+    --trait: #c9d3cb;
+    --ok: #1f7a4d;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fond: #141a16;
+      --carte: #1c241f;
+      --encre: #e7ede8;
+      --doux: #a3b0a7;
+      --accent: #4fbf86;
+      --accent-encre: #0e1a13;
+      --teinte: #23332a;
+      --champ: #18201b;
+      --trait: #3a4a40;
+      --ok: #4fbf86;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--fond);
+    color: var(--encre);
+    font: 18px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 0 16px 120px;
+  }
+  main { max-width: 720px; margin: 0 auto; }
+  header { padding: 28px 0 8px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 8px; text-wrap: balance; }
+  .sous-titre { color: var(--doux); margin: 0 0 20px; }
+  .intro { background: var(--teinte); border-radius: 16px; padding: 18px 20px; margin-bottom: 20px; }
+  .intro p { margin: 0 0 10px; }
+  .intro p:last-child { margin-bottom: 0; }
+  .identite { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; margin-bottom: 24px; }
+  @media (max-width: 480px) { .identite { grid-template-columns: 1fr; } }
+  section.partie { background: var(--carte); border-radius: 18px; padding: 20px; margin-bottom: 18px; }
+  h2 { font-size: 22px; margin: 0 0 14px; color: var(--accent); }
+  .question { margin-bottom: 22px; }
+  .question:last-child { margin-bottom: 0; }
+  label { display: block; font-weight: 600; margin-bottom: 8px; }
+  .num { color: var(--doux); font-weight: 400; margin-right: 6px; }
+  textarea, input[type="text"], input[type="date"] {
+    width: 100%;
+    font: inherit;
+    color: var(--encre);
+    background: var(--champ);
+    border: 1px solid var(--trait);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  textarea { min-height: 92px; resize: vertical; }
+  textarea:focus, input:focus, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .barre {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: var(--carte);
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, .12);
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  }
+  .barre-in { max-width: 720px; margin: 0 auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .avancement { flex: 1 1 160px; font-size: 16px; color: var(--doux); }
+  .avancement strong { color: var(--encre); }
+  .jauge { height: 8px; background: var(--teinte); border-radius: 8px; margin-top: 6px; overflow: hidden; }
+  .jauge span { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+  button {
+    font: inherit; font-weight: 600; border: 0; border-radius: 12px; padding: 12px 18px; cursor: pointer;
+    background: var(--accent); color: var(--accent-encre);
+  }
+  button.second { background: var(--teinte); color: var(--encre); }
+  .envoi { background: var(--carte); border-radius: 18px; padding: 20px; margin-bottom: 18px; }
+  .envoi .boutons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .note { color: var(--doux); font-size: 16px; }
+  .enregistre { color: var(--ok); font-size: 15px; min-height: 1.4em; }
+  .merci { text-align: center; color: var(--doux); padding: 8px 0 24px; }
+  @media (prefers-reduced-motion: reduce) { .jauge span { transition: none; } }
+  @media print { .barre, .envoi .boutons { display: none; } body { padding-bottom: 0; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Entretien avec la coordination</h1>
+    <p class="sous-titre">Environ 45 minutes, en une ou plusieurs fois</p>
+  </header>
+
+  <div class="intro">
+    <p>Odoo vous donne déjà plusieurs outils : le Coup d'œil, les procès-verbaux de réunion, le rapport du jour. Avant
+       d'en ajouter d'autres, nous voulons partir de <strong>votre travail réel</strong>.</p>
+    <p>Il n'y a pas de bonne ou de mauvaise réponse, et <strong>ce n'est pas une évaluation</strong> : vos réponses servent
+       seulement à choisir les outils qui vous aideront vraiment. Répondez en quelques mots ou en détail, et laissez de
+       côté ce qui ne vous concerne pas.</p>
+    <p><strong>Vos réponses restent sur votre téléphone</strong>, enregistrées au fur et à mesure : vous pouvez fermer la
+       page et reprendre plus tard. Elles ne partent que lorsque vous appuyez sur « Envoyer mes réponses », en bas.</p>
+  </div>
+
+  <div class="identite">
+    <div>
+      <label for="prenom">Votre prénom (facultatif)</label>
+      <input type="text" id="prenom" autocomplete="given-name">
+    </div>
+    <div>
+      <label for="date">Date</label>
+      <input type="date" id="date">
+    </div>
+  </div>
+
+  <div id="questionnaire"></div>
+
+  <section class="envoi" id="envoi">
+    <h2>Envoyer mes réponses</h2>
+    <p class="note">Le bouton ouvre le partage de votre téléphone : choisissez WhatsApp ou votre messagerie, et
+       l'interlocuteur à qui l'envoyer. Si le partage ne s'ouvre pas, téléchargez le fichier ou copiez le texte.</p>
+    <div class="boutons">
+      <button type="button" id="partager">Envoyer mes réponses</button>
+      <button type="button" class="second" id="telecharger">Télécharger le fichier</button>
+      <button type="button" class="second" id="copier">Copier le texte</button>
+    </div>
+    <p class="enregistre" id="message" role="status" aria-live="polite"></p>
+    <p class="note">Une fois vos réponses bien reçues, vous pouvez les effacer de ce téléphone :
+       <button type="button" class="second" id="effacer">Effacer mes réponses</button></p>
+  </section>
+
+  <p class="merci">Merci pour votre temps. Vos réponses seront relues avec vous avant toute décision, et rien ne sera mis
+     en place sans que vous l'ayez vu.</p>
+</main>
+
+<div class="barre" aria-label="Avancement">
+  <div class="barre-in">
+    <div class="avancement">
+      <span id="compte"><strong>0</strong> réponse sur 25</span>
+      <span class="enregistre" id="etat"></span>
+      <div class="jauge" aria-hidden="true"><span id="jauge"></span></div>
+    </div>
+    <button type="button" id="aller-envoi">Envoyer</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  // Les questions : les mêmes que docs/entretien-coordination.md (le modifier aussi si on en change une).
+  var PARTIES = [
+    ["Votre mission", [
+      "En quelques phrases, quelle est votre mission ? Existe-t-il une fiche de poste écrite ?",
+      "Qui vous confie le travail, et à qui rendez-vous compte (le bureau, le président, une autre personne) ?",
+      "À quel rythme rendez-vous compte : chaque semaine, chaque mois, à chaque réunion du bureau ?"]],
+    ["Votre périmètre", [
+      "Combien de pôles suivez-vous, et lesquels ?",
+      "Combien de projets ou de dossiers sont en cours en même temps, à peu près ?",
+      "Travaillez-vous avec les sections (Jamats) ? Lesquelles, et pour quoi ?",
+      "Avec qui travaillez-vous le plus au quotidien (par fonction : trésorier, responsable d'un pôle…) ?"]],
+    ["Une semaine ordinaire", [
+      "Qu'est-ce qui vous prend le plus de temps dans une semaine ?",
+      "Quelles tâches refaites-vous souvent, presque à l'identique ?",
+      "Quels outils utilisez-vous en dehors d'Odoo : Excel, WhatsApp, un cahier, des courriels, autre chose ?"]],
+    ["Les demandes qui vous arrivent", [
+      "D'où viennent les demandes : membres, sections, pôles, partenaires ? Par quel moyen : courriel, WhatsApp, téléphone, visite au bureau ?",
+      "Combien par semaine, à peu près ? Comment les suivez-vous aujourd'hui ?",
+      "Vous est-il déjà arrivé d'oublier ou de perdre une demande ? Que s'était-il passé ?"]],
+    ["Les réunions et les décisions", [
+      "Quelles réunions préparez-vous ou suivez-vous (bureau, pôles, autres), et à quel rythme ?",
+      "Une fois une décision prise, comment vérifiez-vous qu'elle est réellement exécutée ?"]],
+    ["Les événements", [
+      "Quels événements organisez-vous ou aidez-vous à organiser (majalis, assemblées, formations, autres) ?",
+      "Pour chacun, que faut-il préparer ? Y a-t-il des inscriptions, des bénévoles à répartir, des salles ou du matériel à réserver ?"]],
+    ["Rendre compte", [
+      "Sous quelle forme rendez-vous compte aujourd'hui : un document écrit, une présentation en réunion, à l'oral ?",
+      "Qu'est-ce qu'on vous demande le plus souvent (« où en est tel dossier ? », « qui s'en occupe ? ») ?"]],
+    ["La communication", [
+      "Comment informez-vous le staff ? Et les membres, s'il vous arrive de leur écrire ?"]],
+    ["Odoo aujourd'hui", [
+      "Dans le Coup d'œil, qu'est-ce qui vous sert ? Qu'est-ce qui vous gêne ou vous paraît inutile ?",
+      "Utilisez-vous les procès-verbaux de réunion et le rapport du jour ? Qu'en pensez-vous ?",
+      "Que cherchez-vous dans Odoo sans le trouver ?"]],
+    ["Pour finir", [
+      "Si vous étiez absente deux semaines, qu'est-ce qui risquerait de se perdre ou de s'arrêter ?",
+      "Si vous pouviez obtenir trois choses qui vous faciliteraient vraiment le travail, lesquelles choisiriez-vous ?"]]
+  ];
+  var CLE = "entretien-coordination-v1";
+  var TOTAL = 0;
+  PARTIES.forEach(function (p) { TOTAL += p[1].length; });
+
+  // Le stockage du téléphone peut être refusé (navigation privée) : la page marche quand même, sans reprise.
+  function lire() {
+    try { return JSON.parse(localStorage.getItem(CLE) || "{}"); } catch (e) { return {}; }
+  }
+  function ecrire(donnees) {
+    try { localStorage.setItem(CLE, JSON.stringify(donnees)); return true; } catch (e) { return false; }
+  }
+
+  var conteneur = document.getElementById("questionnaire");
+  var n = 0;
+  PARTIES.forEach(function (partie, i) {
+    var section = document.createElement("section");
+    section.className = "partie";
+    var h2 = document.createElement("h2");
+    h2.textContent = (i + 1) + ". " + partie[0];
+    section.appendChild(h2);
+    partie[1].forEach(function (texte) {
+      n += 1;
+      var bloc = document.createElement("div");
+      bloc.className = "question";
+      var label = document.createElement("label");
+      label.setAttribute("for", "q" + n);
+      var num = document.createElement("span");
+      num.className = "num";
+      num.textContent = n + ".";
+      label.appendChild(num);
+      label.appendChild(document.createTextNode(texte));
+      var zone = document.createElement("textarea");
+      zone.id = "q" + n;
+      zone.rows = 3;
+      zone.setAttribute("data-question", texte);
+      bloc.appendChild(label);
+      bloc.appendChild(zone);
+      section.appendChild(bloc);
+    });
+    conteneur.appendChild(section);
+  });
+
+  var champs = Array.prototype.slice.call(document.querySelectorAll("textarea, #prenom, #date"));
+  var donnees = lire();
+  champs.forEach(function (c) { if (donnees[c.id]) { c.value = donnees[c.id]; } });
+  var date = document.getElementById("date");
+  if (!date.value) { date.value = new Date().toISOString().slice(0, 10); }
+
+  function ajuster(zone) {
+    zone.style.height = "auto";
+    zone.style.height = Math.max(92, zone.scrollHeight + 2) + "px";
+  }
+  function compter() {
+    var faites = Array.prototype.filter.call(document.querySelectorAll("textarea"),
+      function (z) { return z.value.trim() !== ""; }).length;
+    document.getElementById("compte").innerHTML = "<strong>" + faites + "</strong> réponse" + (faites > 1 ? "s" : "") +
+      " sur " + TOTAL;
+    document.getElementById("jauge").style.width = Math.round(100 * faites / TOTAL) + "%";
+  }
+  var minuterie = null;
+  champs.forEach(function (c) {
+    if (c.tagName === "TEXTAREA") { ajuster(c); }
+    c.addEventListener("input", function () {
+      if (c.tagName === "TEXTAREA") { ajuster(c); }
+      donnees[c.id] = c.value;
+      var ok = ecrire(donnees);
+      compter();
+      var etat = document.getElementById("etat");
+      etat.textContent = ok ? " · enregistré" : " · non enregistré sur ce téléphone";
+      clearTimeout(minuterie);
+      minuterie = setTimeout(function () { etat.textContent = ""; }, 1800);
+    });
+  });
+  compter();
+
+  function texteExport() {
+    var lignes = ["ENTRETIEN AVEC LA COORDINATION", ""];
+    var prenom = document.getElementById("prenom").value.trim();
+    if (prenom) { lignes.push("Prénom : " + prenom); }
+    lignes.push("Date : " + (date.value || ""), "");
+    var k = 0;
+    PARTIES.forEach(function (partie, i) {
+      lignes.push("== " + (i + 1) + ". " + partie[0].toUpperCase() + " ==", "");
+      partie[1].forEach(function (texte) {
+        k += 1;
+        var rep = document.getElementById("q" + k).value.trim();
+        lignes.push(k + ". " + texte, "Réponse : " + (rep || "(pas de réponse)"), "");
+      });
+    });
+    return lignes.join("\n");
+  }
+  function nomFichier() {
+    return "entretien-coordination-" + (date.value || "reponses") + ".txt";
+  }
+  function dire(msg) { document.getElementById("message").textContent = msg; }
+
+  document.getElementById("aller-envoi").addEventListener("click", function () {
+    document.getElementById("envoi").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  document.getElementById("partager").addEventListener("click", function () {
+    var texte = texteExport();
+    var fichier = null;
+    try { fichier = new File([texte], nomFichier(), { type: "text/plain" }); } catch (e) { fichier = null; }
+    if (navigator.share) {
+      var envoi = (fichier && navigator.canShare && navigator.canShare({ files: [fichier] }))
+        ? { title: "Entretien avec la coordination", files: [fichier] }
+        : { title: "Entretien avec la coordination", text: texte };
+      navigator.share(envoi).then(function () { dire("Partage ouvert. Vérifiez que le message est bien parti."); })
+        .catch(function (e) { if (e && e.name !== "AbortError") { dire("Le partage a échoué : téléchargez le fichier ou copiez le texte."); } });
+    } else {
+      dire("Le partage n'est pas disponible ici : téléchargez le fichier ou copiez le texte.");
+    }
+  });
+
+  document.getElementById("telecharger").addEventListener("click", function () {
+    var lien = document.createElement("a");
+    lien.href = URL.createObjectURL(new Blob([texteExport()], { type: "text/plain;charset=utf-8" }));
+    lien.download = nomFichier();
+    document.body.appendChild(lien);
+    lien.click();
+    setTimeout(function () { URL.revokeObjectURL(lien.href); lien.remove(); }, 1000);
+    dire("Fichier téléchargé : joignez-le à un message.");
+  });
+
+  document.getElementById("copier").addEventListener("click", function () {
+    var texte = texteExport();
+    var reussi = function () { dire("Texte copié : collez-le dans un message."); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texte).then(reussi, function () { dire("La copie a échoué : téléchargez le fichier."); });
+    } else {
+      var zone = document.createElement("textarea");
+      zone.value = texte;
+      document.body.appendChild(zone);
+      zone.select();
+      try { document.execCommand("copy"); reussi(); } catch (e) { dire("La copie a échoué : téléchargez le fichier."); }
+      zone.remove();
+    }
+  });
+
+  document.getElementById("effacer").addEventListener("click", function () {
+    if (!confirm("Effacer toutes vos réponses de ce téléphone ? Faites-le seulement une fois qu'elles ont bien été reçues.")) { return; }
+    try { localStorage.removeItem(CLE); } catch (e) { /* rien à effacer */ }
+    donnees = {};
+    champs.forEach(function (c) { if (c.id !== "date") { c.value = ""; } if (c.tagName === "TEXTAREA") { ajuster(c); } });
+    compter();
+    dire("Réponses effacées de ce téléphone.");
+  });
+})();
+</script>
+</body>
+</html>

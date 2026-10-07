@@ -12,6 +12,7 @@ Source du site public de l'Association Khoja Shia Ithna Asheri de Madagascar, de
 | `index.html` | page d'accueil (présentation, domaines d'action, éducation en chiffres, calendrier, sections, Consultation 360°, services, contact) |
 | `calendrier/` | calendrier chiite complet, consultable mois par mois |
 | `consultation360/` | page de la Consultation 360° |
+| `entretien-coordination/` | **outil interne et temporaire**, lié de nulle part : le questionnaire d'entretien de la coordination (source : `plateforme-aksiam-etudiants/docs/entretien-coordination.html`). Aucune réponse n'arrive ici : elles restent sur le téléphone jusqu'à l'envoi. À retirer après l'entretien. |
 
 Tous les liens entre pages sont **relatifs** : le site fonctionne à l'identique en aperçu
 (`aksiam-org.github.io/site-vitrine/`) et à la racine d'`aksiam.mg`.
