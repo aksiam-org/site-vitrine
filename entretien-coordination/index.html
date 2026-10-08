@@ -298,7 +298,8 @@
     var fichier = null;
     // La marque UTF-8 (BOM) en tête du FICHIER : sans elle, des lecteurs de Windows lisent les accents de travers
     // (vu le 2026-10-07 sur le premier essai d'Assim). Le texte partagé ou copié n'en a pas besoin.
-    try { fichier = new File(["\uFEFF" + texte], nomFichier(), { type: "text/plain;charset=utf-8" }); } catch (e) { fichier = null; }
+    // Type nu « text/plain » : le partage d'Android refuse « text/plain;charset=utf-8 » (vu le 2026-10-08).
+    try { fichier = new File(["\uFEFF" + texte], nomFichier(), { type: "text/plain" }); } catch (e) { fichier = null; }
     if (navigator.share) {
       var envoi = (fichier && navigator.canShare && navigator.canShare({ files: [fichier] }))
         ? { title: "Entretien avec la coordination", files: [fichier] }
